@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f5f4fa">
 <meta name="description" content="Psicólogos, psiquiatras, terapeutas y voluntarios dispuestos a escucharte después del sismo en Venezuela. Haz un test de ansiedad, agenda una consulta o deja una petición de apoyo. Gratuito y comunitario.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Psicólogos en Venezuela · Apoyo emocional después del sismo">
+<meta property="og:description" content="Psicólogos, psiquiatras, terapeutas y voluntarios dispuestos a escucharte — muchos gratis. Test de ansiedad y mural de peticiones.">
+<meta property="og:url" content="https://psicologosenvenezuela.com">
+<meta property="og:image" content="https://psicologosenvenezuela.com/icon-512.png">
+<meta name="twitter:card" content="summary">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="preconnect" href="https://ozuxfepfkvnxkywdsqxy.supabase.co" crossorigin>
@@ -72,12 +78,10 @@
     padding:.65rem .2rem;border-radius:.65rem;display:flex;align-items:center;justify-content:center;gap:.35rem;
     position:relative;z-index:2;transition:color .2s var(--ease);min-height:2.9rem}
   .seg svg{width:1.05rem;height:1.05rem;flex:none}
-  .seg.on{color:var(--brand-deep)}
-  .seg-thumb{position:absolute;top:.25rem;left:.25rem;height:calc(100% - .5rem);width:calc((100% - .9rem)/3);
-    background:var(--surface);border-radius:.65rem;box-shadow:0 1px 2px rgba(23,18,36,.10),0 3px 10px rgba(23,18,36,.16);
-    transition:transform .28s var(--ease);z-index:1}
-  .segmented[data-i="1"] .seg-thumb{transform:translateX(calc(100% + .2rem))}
-  .segmented[data-i="2"] .seg-thumb{transform:translateX(calc(200% + .4rem))}
+  /* Tab activo sombreado — siempre se nota dónde estás */
+  .seg{transition:color .2s var(--ease),background .2s var(--ease),box-shadow .2s var(--ease)}
+  .seg.on{color:var(--brand-deep);background:var(--surface);
+    box-shadow:0 1px 2px rgba(23,18,36,.10),0 4px 12px rgba(23,18,36,.18)}
 
   /* ===== bloques ===== */
   .hero{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-card);padding:1.15rem;margin:.9rem 0 0;box-shadow:var(--shadow-card)}
@@ -134,6 +138,20 @@
   .tag.t-terapeuta{background:var(--teal-soft);color:#076d6f}
   .tag.t-voluntario{background:var(--ok-bg);color:var(--ok)}
   .tag.t-gratis{background:var(--ok-bg);color:var(--ok)}
+  /* Estilo IG search: avatar circular + nombre + handle + check de verificado */
+  .phead{display:flex;align-items:center;gap:.7rem;min-width:0}
+  .avatar{flex:none;width:3.3rem;height:3.3rem;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;font-size:1.15rem;letter-spacing:.02em;box-shadow:0 2px 8px rgba(23,18,36,.20);
+    border:2.5px solid #fff;outline:2px solid var(--line-2)}
+  .av-psicologo{background:var(--grad-brand)}
+  .av-psiquiatra{background:linear-gradient(150deg,#3f83f8,#1a56db)}
+  .av-terapeuta{background:linear-gradient(150deg,#13b6b7,#086e70)}
+  .av-voluntario{background:linear-gradient(150deg,#34c26b,#0f8a45)}
+  .pinfo{min-width:0}
+  .handle{font-size:.85rem;color:var(--muted);font-weight:600;margin:.12rem 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vcheck{display:inline-flex;align-items:center;justify-content:center;width:1.05rem;height:1.05rem;border-radius:50%;
+    background:var(--grad-brand);margin-left:.3rem;vertical-align:-.12rem;box-shadow:0 1px 3px rgba(109,79,224,.4)}
+  .vcheck svg{width:.62rem;height:.62rem}
   .badge{flex:none;font-size:.78rem;font-weight:800;padding:.4rem .7rem;border-radius:var(--r-pill);white-space:nowrap;display:inline-flex;align-items:center;gap:.35rem}
   .badge .d{width:.5rem;height:.5rem;border-radius:50%;background:currentColor}
   .b-on{background:var(--ok-bg);color:var(--ok)}.b-off{background:var(--unk-bg);color:var(--unk)}
@@ -192,7 +210,12 @@
   .q-progress{height:.45rem;background:var(--surface-2);border-radius:99px;overflow:hidden;margin:.6rem 0 1rem}
   .q-bar{height:100%;width:0%;background:var(--grad-brand);border-radius:99px;transition:width .3s var(--ease)}
   .q-step{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-  .q-title{font-size:1.12rem;font-weight:800;margin:.3rem 0 .9rem;line-height:1.35}
+  .q-fixed{display:inline-flex;align-items:center;gap:.4rem;background:var(--brand-soft);border:1.5px solid #d9ccff;color:#3b2d80;
+    font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:.5rem .85rem;border-radius:var(--r-pill);margin:.4rem 0 .7rem}
+  .q-fixed.ctx{background:var(--surface-2);border-color:var(--line);color:var(--ink-2)}
+  .q-title{font-size:1.12rem;font-weight:800;margin:.1rem 0 .9rem;line-height:1.35}
+  .q-anim{animation:qslide .32s var(--ease)}
+  @keyframes qslide{from{opacity:0;transform:translateX(.8rem)}to{opacity:1;transform:none}}
   .opts{display:flex;flex-direction:column;gap:.5rem}
   .opt{width:100%;text-align:left;font-size:.95rem;font-weight:700;padding:.85rem .9rem;border-radius:.8rem;
     border:1.5px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;min-height:3rem;
@@ -315,7 +338,6 @@
   </div>
   <div class="segwrap">
     <div class="segmented" id="segmented" data-i="0" role="tablist">
-      <span class="seg-thumb"></span>
       <button class="seg on" data-view="apoyo" role="tab">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="8" r="3.4"/><path d="M5 20a6 6 0 0 1 12 0"/><path d="M19 8v6M22 11h-6"/></svg>
         Profesionales
@@ -420,7 +442,7 @@
   <section id="view-test" class="hide">
     <div class="hero">
       <h2>¿Cómo estás tú?</h2>
-      <p>Perder a alguien, sobrevivir a un terremoto, quedarte sin casa o no poder volver a trabajar deja huellas que no siempre se ven. Este test corto (<b>escala GAD-7</b>, usada por profesionales en todo el mundo) te ayuda a ponerle nombre a lo que sientes. <b>Es anónimo</b>: tus respuestas no salen de tu teléfono.</p>
+      <p>Perder a alguien, sobrevivir a un terremoto, quedarte sin casa o no poder volver a trabajar deja huellas que no siempre se ven. Este test corto — <b>seleccionado por una psicóloga clínica colegiada</b> — te ayuda a ponerle nombre a lo que sientes. <b>Es anónimo</b>: tus respuestas no salen de tu teléfono.</p>
     </div>
     <div class="quiz-card" id="quiz">
       <!-- se pinta con JS -->
@@ -656,7 +678,7 @@
     <h2>Cómo funciona</h2>
     <p class="hint">Red gratuita y comunitaria de apoyo emocional tras el sismo. Hermana de <b>hospitalesenvenezuela.com</b>. Tres cosas que puedes hacer aquí:</p>
     <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">1</span><div><b style="font-size:1rem">Encontrar con quién hablar</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">En <b>Profesionales</b> hay psicólogos, psiquiatras, terapeutas y voluntarios. Los que están 🟢 disponibles pueden atenderte ya, por WhatsApp o cita.</div></div></div>
-    <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">2</span><div><b style="font-size:1rem">Saber cómo estás</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">El <b>Test</b> (escala GAD-7) mide tu nivel de ansiedad en 2 minutos y te orienta sobre qué hacer. Es anónimo: nada sale de tu teléfono.</div></div></div>
+    <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">2</span><div><b style="font-size:1rem">Saber cómo estás</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">El <b>Test</b> mide tu nivel de ansiedad en 2 minutos y te orienta sobre qué hacer. Lo seleccionó una psicóloga clínica colegiada y es anónimo: nada sale de tu teléfono.</div></div></div>
     <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">3</span><div><b style="font-size:1rem">Pedir apoyo en el Mural</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">Personas, hospitales, colegios, centros de acopio y refugios publican peticiones. Los profesionales las <b>toman</b> y contactan al solicitante.</div></div></div>
     <p style="font-size:.84rem;color:var(--muted);border-top:1px solid var(--line-2);padding-top:.9rem"><b>Sobre las credenciales:</b> el registro de psicólogos colegiados es <b>información pública</b> de la Federación de Psicólogos de Venezuela. Verifica cualquier FPV en <a href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer">sistema.fpv.org.ve/consulta-psicologos</a>. La plataforma es comunitaria y no sustituye atención médica de emergencia — en crisis llama al <b>171</b>.</p>
     <button id="guia-ok" class="send">Entendido</button>
@@ -754,6 +776,7 @@ function aplicarFiltrosProf(){
     return true;
   });
 }
+function iniciales(n){const p=String(n||"").trim().split(/\s+/);return (((p[0]||"")[0]||"")+((p[1]||"")[0]||"")).toUpperCase();}
 function profCard(p){
   const cred=p.credencial?`<div class="cred">🎓 Credencial: <b>${esc(p.credencial)}</b>${p.tipo==="psicologo"?` · <a href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer">verificar en el registro FPV →</a>`:""}</div>`:"";
   const ver=p.verificado?`<div class="vline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>Credencial verificada por la plataforma</div>`:"";
@@ -762,12 +785,21 @@ function profCard(p){
   const tags=[`<span class="tag t-${esc(p.tipo)}">${esc(TIPO_PROF[p.tipo]||"Profesional")}</span>`];
   if(p.gratuito)tags.push('<span class="tag t-gratis">Gratuito</span>');
   if(p.acepta_visitas)tags.push('<span class="tag">Hace visitas</span>');
+  const vcheck=p.verificado?`<span class="vcheck" title="Credencial verificada"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>`:"";
+  const handle=p.instagram?("@"+esc(String(p.instagram).replace(/^@/,"").trim())):esc(TIPO_PROF[p.tipo]||"");
   return `<li class="card" data-id="${esc(p.id)}">
-    <div class="card-top"><div>
-      <p class="name">${esc(p.nombre)}${p.verificado?' <span title="Credencial verificada" style="color:#0f8a45">✓</span>':""}</p>
-      <p class="sub">${tags.join("")}</p>
-      <p class="sub" style="margin-top:.35rem">${esc(p.ciudad)}, ${esc(p.estado)} · ${esc(MODAL[p.modalidad]||"")}</p>
-    </div><span class="badge ${p.online_ahora?"b-on":"b-off"}"><span class="d"></span>${p.online_ahora?"Disponible":"Según horario"}</span></div>
+    <div class="card-top">
+      <div class="phead">
+        <span class="avatar av-${esc(p.tipo)}" aria-hidden="true">${esc(iniciales(p.nombre))}</span>
+        <div class="pinfo">
+          <p class="name">${esc(p.nombre)}${vcheck}</p>
+          <p class="handle">${handle}</p>
+        </div>
+      </div>
+      <span class="badge ${p.online_ahora?"b-on":"b-off"}"><span class="d"></span>${p.online_ahora?"Disponible":"Según horario"}</span>
+    </div>
+    <p class="sub" style="margin-top:.6rem">${tags.join("")}</p>
+    <p class="sub" style="margin-top:.35rem">${esc(p.ciudad)}, ${esc(p.estado)} · ${esc(MODAL[p.modalidad]||"")}</p>
     ${ver}${cred}
     ${p.bio?`<div class="bio">${esc(p.bio)}</div>`:""}
     ${p.especialidades?`<div class="meta">💠 ${esc(p.especialidades)}</div>`:""}
@@ -821,15 +853,16 @@ function renderPets(){
   empty.classList.add("hide");list.innerHTML=rows.map(petCard).join("");
 }
 
-/* ---------- QUIZ GAD-7 ---------- */
+/* ---------- QUIZ (selección de la psicóloga clínica del proyecto) ---------- */
+/* Preguntas seleccionadas por la psicóloga clínica del proyecto (FPV 19976) */
 const QZ_PREG=[
   "¿Te has sentido nervioso/a, ansioso/a o con los nervios de punta?",
   "¿No has podido dejar de preocuparte o controlar la preocupación?",
-  "¿Te has preocupado demasiado por diferentes cosas?",
-  "¿Has tenido dificultad para relajarte?",
-  "¿Has estado tan inquieto/a que no puedes quedarte quieto/a?",
   "¿Te has molestado o irritado con facilidad?",
-  "¿Has sentido miedo, como si algo terrible fuera a pasar?"
+  "¿Has sentido miedo, como si algo terrible fuera a pasar?",
+  "¿Has tenido problemas para dormir, o pesadillas sobre lo que pasó?",
+  "¿Has perdido el interés en cosas que antes disfrutabas?",
+  "¿Te cuesta sentirte seguro/a incluso en lugares que sabes que están bien?"
 ];
 const QZ_OPTS=[["Nunca",0],["Varios días",1],["Más de la mitad de los días",2],["Casi todos los días",3]];
 const QZ_CTX=[["duelo","Perdí a un familiar o amigo"],["sismo","Sobreviví al terremoto"],["casa","Perdí mi casa"],["trabajo","No he podido volver a trabajar"],["cuido","Estoy cuidando a otros"],["nodecir","Prefiero no decirlo"]];
@@ -845,8 +878,8 @@ let qzPaso=-1, qzResp=Array(7).fill(null), qzCtx=null;
 function qzRender(){
   const q=$("quiz");
   if(qzPaso===-1){
-    q.innerHTML=`<div class="q-step">Test de ansiedad · GAD-7 · 2 minutos</div>
-      <div class="q-title">7 preguntas sobre las últimas 2 semanas. Sin juicio — solo una brújula honesta para orientarte.</div>
+    q.innerHTML=`<div class="q-step">Test de ansiedad · 2 minutos</div>
+      <div class="q-title">7 preguntas sobre las últimas 2 semanas, seleccionadas por una psicóloga clínica colegiada. Sin juicio — solo una brújula honesta para orientarte.</div>
       <button class="send" id="qz-start">Empezar el test</button>`;
     $("qz-start").addEventListener("click",()=>{qzPaso=0;qzRender();});
     return;
@@ -855,8 +888,9 @@ function qzRender(){
     const sel=qzResp[qzPaso];
     q.innerHTML=`<div class="q-step">Pregunta ${qzPaso+1} de 8</div>
       <div class="q-progress"><div class="q-bar" style="width:${Math.round(((qzPaso)/8)*100)}%"></div></div>
-      <div class="q-title">En las últimas 2 semanas… ${esc(QZ_PREG[qzPaso])}</div>
-      <div class="opts">${QZ_OPTS.map((o,i)=>`<button class="opt${sel===i?" sel":""}" data-i="${i}"><span class="dot"></span>${esc(o[0])}</button>`).join("")}</div>
+      <div class="q-fixed">📅 En las últimas 2 semanas…</div>
+      <div class="q-title q-anim">${esc(QZ_PREG[qzPaso])}</div>
+      <div class="opts q-anim">${QZ_OPTS.map((o,i)=>`<button class="opt${sel===i?" sel":""}" data-i="${i}"><span class="dot"></span>${esc(o[0])}</button>`).join("")}</div>
       <div class="q-nav">
         <button class="q-back" id="qz-back" ${qzPaso===0?"disabled":""} aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
         <button class="send" id="qz-next" ${sel==null?"disabled":""}>Siguiente</button>
@@ -869,8 +903,9 @@ function qzRender(){
   if(qzPaso===7){
     q.innerHTML=`<div class="q-step">Pregunta 8 de 8 · opcional</div>
       <div class="q-progress"><div class="q-bar" style="width:88%"></div></div>
-      <div class="q-title">¿Qué situación estás atravesando? (para orientarte mejor)</div>
-      <div class="opts">${QZ_CTX.map(c=>`<button class="opt${qzCtx===c[0]?" sel":""}" data-c="${c[0]}"><span class="dot"></span>${esc(c[1])}</button>`).join("")}</div>
+      <div class="q-fixed ctx">🧭 Para orientarte mejor</div>
+      <div class="q-title q-anim">¿Qué situación estás atravesando?</div>
+      <div class="opts q-anim">${QZ_CTX.map(c=>`<button class="opt${qzCtx===c[0]?" sel":""}" data-c="${c[0]}"><span class="dot"></span>${esc(c[1])}</button>`).join("")}</div>
       <div class="q-nav">
         <button class="q-back" id="qz-back" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
         <button class="send" id="qz-next">Ver mi resultado</button>
@@ -904,7 +939,7 @@ function qzRender(){
       <button class="send dark" id="qz-mural">Dejar una petición en el Mural</button>
       <button class="cancel" id="qz-again">Repetir el test</button>
     </div>
-    <p style="font-size:.78rem;color:var(--muted);margin:.6rem 0 0;line-height:1.5">Escala GAD-7 (Spitzer et al.), de uso libre y aplicada en todo el mundo para tamizaje de ansiedad. Orientativa — no reemplaza la evaluación de un profesional. Tus respuestas <b>no se envían a ningún servidor</b>.</p>`;
+    <p style="font-size:.78rem;color:var(--muted);margin:.6rem 0 0;line-height:1.5">Cuestionario orientativo seleccionado por una <b>psicóloga clínica colegiada (FPV 19976)</b>, inspirado en escalas clínicas de tamizaje y adaptado al contexto del sismo. No reemplaza la evaluación de un profesional. Tus respuestas <b>no se envían a ningún servidor</b>.</p>`;
   $("qz-dir").addEventListener("click",()=>{setView("apoyo");document.querySelector('.chip[data-fil="online"]').click();});
   $("qz-mural").addEventListener("click",()=>{setView("mural");setTimeout(()=>abrir("sheet-peticion"),250);});
   $("qz-again").addEventListener("click",()=>{qzPaso=-1;qzResp=Array(7).fill(null);qzCtx=null;qzRender();});
