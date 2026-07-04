@@ -173,6 +173,9 @@
     text-decoration:none;transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
   .act svg{width:1.05rem;height:1.05rem}
   .act.wa{background:#e9fbf0;border-color:#a7e8c0;color:#0b6b34}
+  .act.acc{background:#e9fbf0;border-color:#a7e8c0;color:#0b6b34}
+  .act.rej{background:var(--bad-bg);border-color:#f3bcbc;color:var(--bad)}
+  .hero label{display:block;font-size:.88rem;font-weight:800;color:var(--ink-2);margin:.8rem 0 .4rem}
   .flag{margin-top:.5rem;border:none;background:none;color:var(--muted);font-size:.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;padding:.4rem 0}
   .flag svg{width:.95rem;height:.95rem}
   .flag:active{color:var(--bad)}
@@ -337,9 +340,12 @@
       <button id="btn-guia" class="icon-btn" aria-label="Cómo funciona">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg>
       </button>
+      <button id="btn-login" class="icon-btn" aria-label="Iniciar sesión — soy profesional" title="Iniciar sesión">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5"/><path d="M4 12h11"/></svg>
+      </button>
     </div>
   </div>
-  <div class="segwrap">
+  <div class="segwrap" id="segwrap">
     <div class="segmented" id="segmented" data-i="0" role="tablist">
       <button class="seg on" data-view="apoyo" role="tab">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="8" r="3.4"/><path d="M5 20a6 6 0 0 1 12 0"/><path d="M19 8v6M22 11h-6"/></svg>
@@ -408,8 +414,8 @@
       Soy psicólogo/a o psiquiatra — registrarme
     </button>
     <button id="cta-mi-ficha" class="cta" style="margin-top:.6rem;font-size:.95rem;padding:.9rem">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg>
-      Ya estoy registrado — gestionar mi ficha
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5"/><path d="M4 12h11"/></svg>
+      Ya estoy registrado — iniciar sesión
     </button>
 
     <footer>
@@ -478,6 +484,60 @@
     <ul id="mlist" class="list" aria-live="polite"><li class="skel"></li><li class="skel"></li></ul>
     <div id="mempty" class="empty hide"></div>
   </section>
+
+  <!-- ===================== MI PANEL (profesional) ===================== -->
+  <section id="view-panel" class="hide">
+    <div class="hero" style="display:flex;align-items:center;gap:.7rem">
+      <button id="pn-volver" class="icon-btn" aria-label="Volver al directorio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <h2 style="font-size:1.15rem;margin:0">Mi panel</h2>
+        <p style="margin:.15rem 0 0;font-size:.85rem;color:var(--muted)">Tu ficha y tus citas</p>
+      </div>
+      <button id="pn-salir" class="flag" style="margin:0">Cerrar sesión</button>
+    </div>
+
+    <div class="hero">
+      <div class="phead" style="margin-bottom:.3rem">
+        <span class="avatar" id="pn-avatar" aria-hidden="true"></span>
+        <div class="pinfo">
+          <p class="name" id="pn-nombre">—</p>
+          <p class="handle" id="pn-tipo">—</p>
+        </div>
+      </div>
+      <p style="margin:.6rem 0 1rem"><span class="badge b-off" id="pn-estado-badge"><span class="d"></span>—</span></p>
+      <input id="pn-foto" type="file" accept="image/*" style="display:none">
+      <label for="pn-foto" class="pickbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2rem;height:1.2rem"><circle cx="12" cy="13" r="3.2"/><path d="M3 8.5A2 2 0 0 1 5 6.5h2l1.2-1.6h7.6L18 6.5h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span id="pn-foto-name">📷 Cambiar foto de perfil</span></label>
+      <label for="pn-bio">Sobre ti (bio)</label>
+      <textarea id="pn-bio" class="fld" rows="2" maxlength="400" placeholder="Preséntate en pocas líneas"></textarea>
+      <label for="pn-esp">Especialidades</label>
+      <input id="pn-esp" class="fld" maxlength="240" placeholder="Ej: Ansiedad · Duelo · Niños">
+      <label for="pn-horarios">Horas disponibles</label>
+      <input id="pn-horarios" class="fld" maxlength="240" placeholder="Ej: Esta semana: Lun–Mié 5–9 pm">
+      <label for="pn-ig">Instagram</label>
+      <input id="pn-ig" class="fld" maxlength="120" placeholder="@tu_usuario">
+      <label for="pn-wa">WhatsApp</label>
+      <input id="pn-wa" class="fld" inputmode="tel" maxlength="40" placeholder="Ej: 0412-0221090">
+      <button id="pn-guardar" class="send">💾 Guardar cambios de mi ficha</button>
+    </div>
+
+    <div class="hero">
+      <b style="font-size:1.02rem">Disponibilidad</b>
+      <p style="margin:.3rem 0 .9rem">Actívala cuando puedas atender — se apaga sola a las 12 horas.</p>
+      <div style="display:flex;gap:.5rem">
+        <button id="pn-on" class="send" style="flex:1">🟢 Estoy disponible</button>
+        <button id="pn-off" class="send dark" style="flex:1">Apagar disponible</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h2 style="font-size:1.05rem;margin:0 0 .3rem">📋 Mis citas</h2>
+      <p style="margin:0 0 .8rem">Quien te pidió cita aparece aquí. Acepta o rechaza, y contáctalo por WhatsApp.</p>
+      <ul id="pn-citas" class="list"></ul>
+      <div id="pn-citas-empty" class="empty hide"></div>
+    </div>
+  </section>
 </div>
 
 <!-- ===================== SHEETS ===================== -->
@@ -543,36 +603,17 @@
   </div>
 </div>
 
-<div id="sheet-ficha" class="scrim" role="dialog" aria-modal="true" aria-label="Gestionar mi ficha">
+<div id="sheet-ficha" class="scrim" role="dialog" aria-modal="true" aria-label="Iniciar sesión">
   <div class="sheet">
     <div class="grip"></div>
-    <h2>Gestionar mi ficha</h2>
-    <p class="hint">Con tu clave puedes: subir tu <b>foto</b>, editar tu ficha, marcarte disponible y revisar las citas que te pidieron.</p>
+    <h2>Iniciar sesión</h2>
+    <p class="hint">Con tu <b>clave de gestión</b> de 6 dígitos entras a tu panel: subes tu foto, editas tu ficha, te marcas disponible y respondes tus citas.</p>
     <label for="mf-prof">¿Quién eres?</label>
     <select id="mf-prof" class="fld"><option value="">Elige tu nombre…</option></select>
     <label for="mf-clave">Tu clave de gestión *</label>
     <input id="mf-clave" class="fld" inputmode="numeric" maxlength="6" placeholder="La clave de 6 dígitos que guardaste">
-    <label for="mf-foto">Tu foto de perfil (opcional)</label>
-    <input id="mf-foto" type="file" accept="image/*" style="display:none">
-    <label for="mf-foto" class="pickbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2rem;height:1.2rem"><circle cx="12" cy="13" r="3.2"/><path d="M3 8.5A2 2 0 0 1 5 6.5h2l1.2-1.6h7.6L18 6.5h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span id="mf-foto-name">📷 Elegir foto (se muestra en tu tarjeta)</span></label>
-    <label for="mf-bio">Sobre ti (bio)</label>
-    <textarea id="mf-bio" class="fld" rows="2" maxlength="400" placeholder="Preséntate en pocas líneas"></textarea>
-    <label for="mf-esp">Especialidades</label>
-    <input id="mf-esp" class="fld" maxlength="240" placeholder="Ej: Ansiedad · Duelo · Niños">
-    <label for="mf-horarios">Horas disponibles</label>
-    <input id="mf-horarios" class="fld" maxlength="240" placeholder="Ej: Esta semana: Lun–Mié 5–9 pm">
-    <label for="mf-ig">Instagram</label>
-    <input id="mf-ig" class="fld" maxlength="120" placeholder="@tu_usuario">
-    <label for="mf-wa">WhatsApp</label>
-    <input id="mf-wa" class="fld" inputmode="tel" maxlength="40" placeholder="Ej: 0412-0221090">
-    <button id="mf-guardar" class="send" style="margin-bottom:.6rem">💾 Guardar cambios de mi ficha</button>
-    <div style="display:flex;gap:.5rem">
-      <button id="mf-on" class="send" style="flex:1">🟢 Estoy disponible</button>
-      <button id="mf-off" class="send dark" style="flex:1">Apagar disponible</button>
-    </div>
-    <button id="mf-citas" class="send" style="margin-top:.6rem;background:var(--surface);color:var(--brand-deep);border:1.5px solid var(--line);box-shadow:var(--shadow-s)">📋 Ver mis citas</button>
-    <div id="mf-citas-list"></div>
-    <button class="cancel" data-close>Cerrar</button>
+    <button id="mf-entrar" class="send">Entrar a mi panel</button>
+    <button class="cancel" data-close>Cancelar</button>
   </div>
 </div>
 
@@ -963,6 +1004,8 @@ function setView(v){
   $("view-apoyo").classList.toggle("hide",v!=="apoyo");
   $("view-test").classList.toggle("hide",v!=="test");
   $("view-mural").classList.toggle("hide",v!=="mural");
+  $("view-panel").classList.toggle("hide",v!=="panel");
+  $("segwrap").classList.toggle("hide",v==="panel");
   if(v==="mural")refrescarMural();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -976,7 +1019,8 @@ document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",
 document.querySelectorAll(".scrim").forEach(s=>s.addEventListener("click",e=>{if(e.target===s)cerrarSheets();}));
 document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrarSheets();});
 $("cta-prof").addEventListener("click",()=>abrir("sheet-prof"));
-$("cta-mi-ficha").addEventListener("click",()=>{poblarMiFicha();abrir("sheet-ficha");});
+$("cta-mi-ficha").addEventListener("click",abrirLogin);
+$("btn-login").addEventListener("click",abrirLogin);
 $("cta-peticion").addEventListener("click",()=>abrir("sheet-peticion"));
 $("btn-guia").addEventListener("click",()=>abrir("sheet-guia"));
 $("guia-ok").addEventListener("click",()=>{try{localStorage.setItem(SEEN_KEY,"1");}catch(e){}cerrarSheets();});
@@ -1006,7 +1050,7 @@ $("pr-send").addEventListener("click",async ()=>{
     });
     if(res&&res.duplicado){toast("Ya existe un registro con ese nombre y credencial","err");return;}
     if(res&&res.ok){
-      try{localStorage.setItem(MI_ID_KEY,res.id);}catch(e){}
+      guardarSesion(res.id,res.clave);
       cerrarSheets();
       ["pr-nombre","pr-cred","pr-wa","pr-ig","pr-estado","pr-ciudad","pr-horarios","pr-esp","pr-bio"].forEach(i=>$(i).value="");
       $("pr-consent").checked=false;$("pr-gratis").checked=false;$("pr-visitas").checked=false;
@@ -1022,25 +1066,86 @@ $("clave-copy").addEventListener("click",async ()=>{
   catch(e){toast("Cópiala manualmente","err");}
 });
 
-/* ---------- mi ficha ---------- */
-function poblarMiFicha(){
-  const sel=$("mf-prof");const miId=(function(){try{return localStorage.getItem(MI_ID_KEY);}catch(e){return null;}})();
+/* ---------- sesión / mi panel ---------- */
+const SESSION_KEY="psi_sesion_v1";
+let PANEL=null;
+function leerSesion(){try{const s=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");return (s&&s.id&&s.clave)?s:null;}catch(e){return null;}}
+function guardarSesion(id,clave){try{localStorage.setItem(SESSION_KEY,JSON.stringify({id:id,clave:clave}));localStorage.setItem(MI_ID_KEY,id);}catch(e){}}
+function borrarSesion(){try{localStorage.removeItem(SESSION_KEY);}catch(e){}}
+function poblarLogin(){
+  const sel=$("mf-prof");const sess=leerSesion();
+  const miId=sess?sess.id:(function(){try{return localStorage.getItem(MI_ID_KEY);}catch(e){return null;}})();
   sel.innerHTML='<option value="">Elige tu nombre…</option>'+PROFS.map(p=>`<option value="${esc(p.id)}"${p.id===miId?" selected":""}>${esc(p.nombre)}${p.credencial?(" · "+esc(p.credencial)):""}</option>`).join("");
-  $("mf-citas-list").innerHTML="";
-  prefillMiFicha();
+  $("mf-clave").value=sess?sess.clave:"";
 }
-function prefillMiFicha(){
-  const p=PROFS.find(x=>x.id===$("mf-prof").value);
-  if($("mf-bio"))$("mf-bio").value=p&&p.bio?p.bio:"";
-  if($("mf-esp"))$("mf-esp").value=p&&p.especialidades?p.especialidades:"";
-  if($("mf-horarios"))$("mf-horarios").value=p&&p.horarios?p.horarios:"";
-  if($("mf-ig"))$("mf-ig").value=p&&p.instagram?("@"+String(p.instagram).replace(/^@/,"")):"";
-  if($("mf-wa"))$("mf-wa").value=p&&p.whatsapp?p.whatsapp:"";
-  if($("mf-foto"))$("mf-foto").value="";
-  if($("mf-foto-name"))$("mf-foto-name").textContent="📷 Elegir foto (se muestra en tu tarjeta)";
+function estadoCitaBadge(estado){
+  if(estado==="aceptada")return '<span class="badge b-on"><span class="d"></span>Aceptada</span>';
+  if(estado==="rechazada")return '<span class="badge b-urg"><span class="d"></span>Rechazada</span>';
+  return '<span class="badge b-off"><span class="d"></span>Pendiente</span>';
 }
-$("mf-prof")&&$("mf-prof").addEventListener("change",prefillMiFicha);
-$("mf-foto")&&$("mf-foto").addEventListener("change",()=>{const f=$("mf-foto").files[0];$("mf-foto-name").textContent=f?("✓ "+(f.name||"foto elegida")):"📷 Elegir foto (se muestra en tu tarjeta)";});
+function citaPanelCard(c){
+  const est=c.estado_cita||"pendiente";
+  return `<li class="card">
+    <div class="card-top">
+      <div><p class="name" style="font-size:1rem">${esc(c.nombre)}</p><p class="sub">${c.modalidad?esc(MODAL[c.modalidad]||c.modalidad)+" · ":""}${esc(hace(c.creado))}</p></div>
+      ${estadoCitaBadge(est)}
+    </div>
+    ${c.mensaje?`<div class="bio">“${esc(c.mensaje)}”</div>`:""}
+    <div class="row-actions">
+      <a class="act wa" href="${esc(waLink(c.telefono,"Hola "+c.nombre+", soy tu profesional de psicologosenvenezuela.com. Vi tu solicitud de cita."))}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>${esc(c.telefono)}</a>
+      ${est==="pendiente"?`<button class="act acc" data-resp="${esc(c.id)}" data-estado="aceptada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Aceptar</button><button class="act rej" data-resp="${esc(c.id)}" data-estado="rechazada"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Rechazar</button>`:""}
+    </div>
+  </li>`;
+}
+function renderPanelCitas(cs){
+  const list=$("pn-citas"),empty=$("pn-citas-empty");
+  if(!Array.isArray(cs)||!cs.length){list.innerHTML="";empty.classList.remove("hide");empty.innerHTML="Aún nadie te ha pedido cita. Cuando pase, aparecerá aquí.";return;}
+  empty.classList.add("hide");list.innerHTML=cs.map(citaPanelCard).join("");
+}
+function pintarPanel(prof,citas){
+  $("pn-nombre").textContent=prof?prof.nombre:"—";
+  $("pn-tipo").textContent=prof?(TIPO_PROF[prof.tipo]||""):"";
+  const av=$("pn-avatar");
+  if(prof&&prof.foto_url){av.innerHTML=`<img src="${esc(prof.foto_url)}" alt="">`;av.className="avatar";}
+  else{av.textContent=prof?iniciales(prof.nombre):"";av.className="avatar av-"+(prof?esc(prof.tipo):"psicologo");}
+  $("pn-bio").value=prof&&prof.bio?prof.bio:"";
+  $("pn-esp").value=prof&&prof.especialidades?prof.especialidades:"";
+  $("pn-horarios").value=prof&&prof.horarios?prof.horarios:"";
+  $("pn-ig").value=prof&&prof.instagram?("@"+String(prof.instagram).replace(/^@/,"")):"";
+  $("pn-wa").value=prof&&prof.whatsapp?prof.whatsapp:"";
+  $("pn-foto").value="";$("pn-foto-name").textContent="📷 Cambiar foto de perfil";
+  const on=!!(prof&&prof.online_ahora);
+  const badge=$("pn-estado-badge");
+  badge.className="badge "+(on?"b-on":"b-off");
+  badge.innerHTML='<span class="d"></span>'+(on?"Disponible ahora":"Apagado — según horario");
+  renderPanelCitas(citas);
+}
+async function entrarPanel(id,clave,silencioso){
+  const cs=await callRPC("psi_mis_citas",{p_id:id,p_clave:clave});
+  PANEL={id:id,clave:clave};
+  guardarSesion(id,clave);
+  pintarPanel(PROFS.find(p=>p.id===id)||null,cs);
+  setView("panel");
+  if(!silencioso)cerrarSheets();
+}
+function abrirLogin(){
+  const sess=leerSesion();
+  if(sess){
+    entrarPanel(sess.id,sess.clave,true).catch(()=>{borrarSesion();poblarLogin();abrir("sheet-ficha");});
+  }else{
+    poblarLogin();abrir("sheet-ficha");
+  }
+}
+$("mf-entrar").addEventListener("click",async ()=>{
+  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
+  if(!id){toast("Elige tu nombre en la lista","err");return;}
+  if(clave.length<6){toast("Escribe tu clave de 6 dígitos","err");return;}
+  const btn=$("mf-entrar");btn.disabled=true;btn.textContent="Entrando…";
+  try{await entrarPanel(id,clave,false);}
+  catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="Entrar a mi panel";}
+});
+$("pn-foto")&&$("pn-foto").addEventListener("change",()=>{const f=$("pn-foto").files[0];$("pn-foto-name").textContent=f?("✓ "+(f.name||"foto elegida")):"📷 Cambiar foto de perfil";});
 async function subirFotoPerfil(file){
   const ext=((file.name||"").split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,5)||"jpg";
   const key="perfil_"+Date.now()+"_"+Math.random().toString(36).slice(2,8)+"."+ext;
@@ -1052,57 +1157,53 @@ async function subirFotoPerfil(file){
   if(!r.ok)throw new Error("foto");
   return SUPABASE_URL+"/storage/v1/object/public/psi-fotos/"+encodeURIComponent(key);
 }
-$("mf-guardar")&&$("mf-guardar").addEventListener("click",async ()=>{
-  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
-  if(!id){toast("Elige tu nombre en la lista","err");return;}
-  if(clave.length<6){toast("Escribe tu clave de 6 dígitos","err");return;}
-  const btn=$("mf-guardar");btn.disabled=true;btn.textContent="Guardando…";
+$("pn-guardar")&&$("pn-guardar").addEventListener("click",async ()=>{
+  if(!PANEL){toast("Vuelve a iniciar sesión","err");return;}
+  const btn=$("pn-guardar");btn.disabled=true;btn.textContent="Guardando…";
   try{
     let fotoUrl=null;
-    const f=$("mf-foto").files[0];
+    const f=$("pn-foto").files[0];
     if(f){
       if(f.size>5*1024*1024){toast("La foto pesa demasiado (máx. 5 MB)","err");btn.disabled=false;btn.textContent="💾 Guardar cambios de mi ficha";return;}
       btn.textContent="Subiendo foto…";
       fotoUrl=await subirFotoPerfil(f);
       btn.textContent="Guardando…";
     }
-    await callRPC("psi_editar_perfil",{p_id:id,p_clave:clave,
-      p_foto_url:fotoUrl,p_bio:($("mf-bio").value||"").trim()||null,
-      p_especialidades:($("mf-esp").value||"").trim()||null,p_horarios:($("mf-horarios").value||"").trim()||null,
-      p_instagram:(($("mf-ig").value||"").trim().replace(/^@/,""))||null,p_whatsapp:($("mf-wa").value||"").trim()||null});
-    try{localStorage.setItem(MI_ID_KEY,id);}catch(e){}
-    toast("✅ Ficha actualizada","ok");cerrarSheets();refrescarProfs();
+    await callRPC("psi_editar_perfil",{p_id:PANEL.id,p_clave:PANEL.clave,
+      p_foto_url:fotoUrl,p_bio:($("pn-bio").value||"").trim()||null,
+      p_especialidades:($("pn-esp").value||"").trim()||null,p_horarios:($("pn-horarios").value||"").trim()||null,
+      p_instagram:(($("pn-ig").value||"").trim().replace(/^@/,""))||null,p_whatsapp:($("pn-wa").value||"").trim()||null});
+    toast("✅ Ficha actualizada","ok");
+    await refrescarProfs();
+    pintarPanel(PROFS.find(p=>p.id===PANEL.id)||null,await callRPC("psi_mis_citas",{p_id:PANEL.id,p_clave:PANEL.clave}));
   }catch(err){toast(err&&err.message==="foto"?"No se pudo subir la foto. Prueba con una JPG/PNG más liviana.":motivo(err),"err");}
   finally{btn.disabled=false;btn.textContent="💾 Guardar cambios de mi ficha";}
 });
-async function miFichaAccion(online){
-  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
-  if(!id){toast("Elige tu nombre en la lista","err");return;}
-  if(clave.length<6){toast("Escribe tu clave de 6 dígitos","err");return;}
-  const btn=online?$("mf-on"):$("mf-off");btn.disabled=true;
+async function panelAccion(online){
+  if(!PANEL){toast("Vuelve a iniciar sesión","err");return;}
+  const btn=online?$("pn-on"):$("pn-off");btn.disabled=true;
   try{
-    await callRPC("psi_actualizar_estado",{p_id:id,p_clave:clave,p_online:online,p_horarios:($("mf-horarios").value||"").trim()||null});
-    try{localStorage.setItem(MI_ID_KEY,id);}catch(e){}
+    await callRPC("psi_actualizar_estado",{p_id:PANEL.id,p_clave:PANEL.clave,p_online:online,p_horarios:($("pn-horarios").value||"").trim()||null});
     toast(online?"🟢 ¡Listo! Apareces como disponible":"Disponibilidad apagada","ok");
-    refrescarProfs();cargarStats();
+    await refrescarProfs();cargarStats();
+    pintarPanel(PROFS.find(p=>p.id===PANEL.id)||null,await callRPC("psi_mis_citas",{p_id:PANEL.id,p_clave:PANEL.clave}));
   }catch(err){toast(motivo(err),"err");}
   finally{btn.disabled=false;}
 }
-$("mf-on").addEventListener("click",()=>miFichaAccion(true));
-$("mf-off").addEventListener("click",()=>miFichaAccion(false));
-$("mf-citas").addEventListener("click",async ()=>{
-  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
-  if(!id||clave.length<6){toast("Elige tu nombre y escribe tu clave","err");return;}
-  const btn=$("mf-citas");btn.disabled=true;btn.textContent="Cargando…";
+$("pn-on").addEventListener("click",()=>panelAccion(true));
+$("pn-off").addEventListener("click",()=>panelAccion(false));
+$("pn-citas").addEventListener("click",async e=>{
+  const b=e.target.closest("[data-resp]");if(!b||!PANEL)return;
+  const citaId=b.getAttribute("data-resp"),estado=b.getAttribute("data-estado");
+  const fila=b.closest(".card");if(fila)fila.querySelectorAll("button").forEach(x=>x.disabled=true);
   try{
-    const cs=await callRPC("psi_mis_citas",{p_id:id,p_clave:clave});
-    try{localStorage.setItem(MI_ID_KEY,id);}catch(e){}
-    $("mf-citas-list").innerHTML=(Array.isArray(cs)&&cs.length)
-      ?cs.map(c=>`<div class="cred" style="margin-top:.5rem"><b>${esc(c.nombre)}</b> · <a href="${esc(waLink(c.telefono,"Hola "+c.nombre+", soy tu profesional de psicologosenvenezuela.com. Vi tu solicitud de cita."))}" target="_blank" rel="noopener noreferrer">${esc(c.telefono)} (WhatsApp)</a><br>${c.modalidad?("Prefiere: "+esc(c.modalidad)+" · "):""}${esc(hace(c.creado))}${c.mensaje?("<br>“"+esc(c.mensaje)+"”"):""}</div>`).join("")
-      :'<div class="cred" style="margin-top:.5rem">Aún nadie te ha pedido cita. Cuando pase, aparecerá aquí.</div>';
-  }catch(err){toast(motivo(err),"err");}
-  finally{btn.disabled=false;btn.textContent="📋 Ver mis citas";}
+    await callRPC("psi_responder_cita",{p_id:PANEL.id,p_clave:PANEL.clave,p_cita:citaId,p_estado:estado});
+    toast(estado==="aceptada"?"✅ Cita aceptada":"Cita rechazada","ok");
+    renderPanelCitas(await callRPC("psi_mis_citas",{p_id:PANEL.id,p_clave:PANEL.clave}));
+  }catch(err){toast(motivo(err),"err");if(fila)fila.querySelectorAll("button").forEach(x=>x.disabled=false);}
 });
+$("pn-volver").addEventListener("click",()=>setView("apoyo"));
+$("pn-salir").addEventListener("click",()=>{borrarSesion();PANEL=null;setView("apoyo");toast("Sesión cerrada","ok");});
 
 /* ---------- agendar cita ---------- */
 let citaCtx=null;
