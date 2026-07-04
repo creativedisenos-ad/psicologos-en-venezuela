@@ -150,7 +150,10 @@
   .pinfo{min-width:0}
   .handle{font-size:.85rem;color:var(--muted);font-weight:600;margin:.12rem 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .vcheck{display:inline-flex;align-items:center;justify-content:center;width:1.05rem;height:1.05rem;border-radius:50%;
-    background:var(--grad-brand);margin-left:.3rem;vertical-align:-.12rem;box-shadow:0 1px 3px rgba(109,79,224,.4)}
+    background:#0095F6;margin-left:.3rem;vertical-align:-.12rem;box-shadow:0 1px 3px rgba(0,149,246,.45)}
+  .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+  .pickbtn{display:flex;align-items:center;gap:.5rem;justify-content:center;border:1.5px dashed var(--brand);color:var(--brand-deep);
+    background:var(--brand-soft);border-radius:var(--r-fld);padding:.85rem;font-weight:800;cursor:pointer;margin-bottom:.7rem;min-height:3rem;text-align:center}
   .vcheck svg{width:.62rem;height:.62rem}
   .badge{flex:none;font-size:.78rem;font-weight:800;padding:.4rem .7rem;border-radius:var(--r-pill);white-space:nowrap;display:inline-flex;align-items:center;gap:.35rem}
   .badge .d{width:.5rem;height:.5rem;border-radius:50%;background:currentColor}
@@ -410,7 +413,7 @@
     </button>
 
     <footer>
-      <p><b>Plataforma comunitaria y gratuita.</b> Conectamos personas con psicólogos y psiquiatras colegiados que ofrecen su tiempo. No sustituye la atención médica de emergencia ni verifica cada dato: <b>confirma siempre la credencial</b> del profesional en el registro público. Si tú o alguien está en peligro inmediato, llama a emergencias.</p>
+      <p><b>Aquí solo se publican profesionales verificables.</b> Únicamente aceptamos <b>psicólogos con credencial FPV</b> y <b>psiquiatras (médicos) con matrícula MPPS</b> — registros públicos que tú mismo puedes consultar en los enlaces de cada tarjeta. El check azul indica credencial ya confirmada por la plataforma. Esta red no sustituye la atención médica de emergencia: si tú o alguien está en peligro inmediato, llama a emergencias.</p>
       <div class="nums">
         <a class="num" href="tel:171"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.3a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.25 1z"/></svg>Emergencias 171</a>
         <a class="num" href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer" style="color:var(--brand-deep)">✓ Verificar FPV</a>
@@ -544,13 +547,25 @@
   <div class="sheet">
     <div class="grip"></div>
     <h2>Gestionar mi ficha</h2>
-    <p class="hint">Márcate disponible cuando puedas atender, actualiza tus horas y revisa las citas que te pidieron.</p>
+    <p class="hint">Con tu clave puedes: subir tu <b>foto</b>, editar tu ficha, marcarte disponible y revisar las citas que te pidieron.</p>
     <label for="mf-prof">¿Quién eres?</label>
     <select id="mf-prof" class="fld"><option value="">Elige tu nombre…</option></select>
     <label for="mf-clave">Tu clave de gestión *</label>
     <input id="mf-clave" class="fld" inputmode="numeric" maxlength="6" placeholder="La clave de 6 dígitos que guardaste">
-    <label for="mf-horarios">Actualizar horas disponibles (opcional)</label>
+    <label for="mf-foto">Tu foto de perfil (opcional)</label>
+    <input id="mf-foto" type="file" accept="image/*" style="display:none">
+    <label for="mf-foto" class="pickbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2rem;height:1.2rem"><circle cx="12" cy="13" r="3.2"/><path d="M3 8.5A2 2 0 0 1 5 6.5h2l1.2-1.6h7.6L18 6.5h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span id="mf-foto-name">📷 Elegir foto (se muestra en tu tarjeta)</span></label>
+    <label for="mf-bio">Sobre ti (bio)</label>
+    <textarea id="mf-bio" class="fld" rows="2" maxlength="400" placeholder="Preséntate en pocas líneas"></textarea>
+    <label for="mf-esp">Especialidades</label>
+    <input id="mf-esp" class="fld" maxlength="240" placeholder="Ej: Ansiedad · Duelo · Niños">
+    <label for="mf-horarios">Horas disponibles</label>
     <input id="mf-horarios" class="fld" maxlength="240" placeholder="Ej: Esta semana: Lun–Mié 5–9 pm">
+    <label for="mf-ig">Instagram</label>
+    <input id="mf-ig" class="fld" maxlength="120" placeholder="@tu_usuario">
+    <label for="mf-wa">WhatsApp</label>
+    <input id="mf-wa" class="fld" inputmode="tel" maxlength="40" placeholder="Ej: 0412-0221090">
+    <button id="mf-guardar" class="send" style="margin-bottom:.6rem">💾 Guardar cambios de mi ficha</button>
     <div style="display:flex;gap:.5rem">
       <button id="mf-on" class="send" style="flex:1">🟢 Estoy disponible</button>
       <button id="mf-off" class="send dark" style="flex:1">Apagar disponible</button>
@@ -785,7 +800,7 @@ function profCard(p){
   return `<li class="card" data-id="${esc(p.id)}">
     <div class="card-top">
       <div class="phead">
-        <span class="avatar av-${esc(p.tipo)}" aria-hidden="true">${esc(iniciales(p.nombre))}</span>
+        ${p.foto_url?`<span class="avatar" aria-hidden="true"><img src="${esc(p.foto_url)}" alt="" loading="lazy"></span>`:`<span class="avatar av-${esc(p.tipo)}" aria-hidden="true">${esc(iniciales(p.nombre))}</span>`}
         <div class="pinfo">
           <p class="name">${esc(p.nombre)}${vcheck}</p>
           <p class="handle">${handle}</p>
@@ -935,7 +950,7 @@ function qzRender(){
       <button class="cancel" id="qz-again">Repetir el test</button>
     </div>
     <p style="font-size:.78rem;color:var(--muted);margin:.6rem 0 0;line-height:1.5">Cuestionario orientativo seleccionado por una <b>psicóloga clínica colegiada (FPV 19976)</b>, inspirado en escalas clínicas de tamizaje y adaptado al contexto del sismo. No reemplaza la evaluación de un profesional. Tus respuestas <b>no se envían a ningún servidor</b>.</p>`;
-  $("qz-dir").addEventListener("click",()=>{setView("apoyo");document.querySelector('.chip[data-fil="online"]').click();});
+  $("qz-dir").addEventListener("click",()=>{setView("apoyo");const c=document.querySelector('.chip[data-fil="todos"]');if(c)c.click();setTimeout(()=>{const el=$("count")||$("list");if(el)el.scrollIntoView({behavior:"smooth",block:"start"});},380);});
   $("qz-mural").addEventListener("click",()=>{setView("mural");setTimeout(()=>abrir("sheet-peticion"),250);});
   $("qz-again").addEventListener("click",()=>{qzPaso=-1;qzResp=Array(7).fill(null);qzCtx=null;qzRender();});
 }
@@ -1012,7 +1027,54 @@ function poblarMiFicha(){
   const sel=$("mf-prof");const miId=(function(){try{return localStorage.getItem(MI_ID_KEY);}catch(e){return null;}})();
   sel.innerHTML='<option value="">Elige tu nombre…</option>'+PROFS.map(p=>`<option value="${esc(p.id)}"${p.id===miId?" selected":""}>${esc(p.nombre)}${p.credencial?(" · "+esc(p.credencial)):""}</option>`).join("");
   $("mf-citas-list").innerHTML="";
+  prefillMiFicha();
 }
+function prefillMiFicha(){
+  const p=PROFS.find(x=>x.id===$("mf-prof").value);
+  if($("mf-bio"))$("mf-bio").value=p&&p.bio?p.bio:"";
+  if($("mf-esp"))$("mf-esp").value=p&&p.especialidades?p.especialidades:"";
+  if($("mf-horarios"))$("mf-horarios").value=p&&p.horarios?p.horarios:"";
+  if($("mf-ig"))$("mf-ig").value=p&&p.instagram?("@"+String(p.instagram).replace(/^@/,"")):"";
+  if($("mf-wa"))$("mf-wa").value=p&&p.whatsapp?p.whatsapp:"";
+  if($("mf-foto"))$("mf-foto").value="";
+  if($("mf-foto-name"))$("mf-foto-name").textContent="📷 Elegir foto (se muestra en tu tarjeta)";
+}
+$("mf-prof")&&$("mf-prof").addEventListener("change",prefillMiFicha);
+$("mf-foto")&&$("mf-foto").addEventListener("change",()=>{const f=$("mf-foto").files[0];$("mf-foto-name").textContent=f?("✓ "+(f.name||"foto elegida")):"📷 Elegir foto (se muestra en tu tarjeta)";});
+async function subirFotoPerfil(file){
+  const ext=((file.name||"").split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,5)||"jpg";
+  const key="perfil_"+Date.now()+"_"+Math.random().toString(36).slice(2,8)+"."+ext;
+  const r=await fetch(SUPABASE_URL+"/storage/v1/object/psi-fotos/"+encodeURIComponent(key),{
+    method:"POST",
+    headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY,"Content-Type":((file.type&&/^image\//.test(file.type))?file.type:"image/jpeg")},
+    body:file
+  });
+  if(!r.ok)throw new Error("foto");
+  return SUPABASE_URL+"/storage/v1/object/public/psi-fotos/"+encodeURIComponent(key);
+}
+$("mf-guardar")&&$("mf-guardar").addEventListener("click",async ()=>{
+  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
+  if(!id){toast("Elige tu nombre en la lista","err");return;}
+  if(clave.length<6){toast("Escribe tu clave de 6 dígitos","err");return;}
+  const btn=$("mf-guardar");btn.disabled=true;btn.textContent="Guardando…";
+  try{
+    let fotoUrl=null;
+    const f=$("mf-foto").files[0];
+    if(f){
+      if(f.size>5*1024*1024){toast("La foto pesa demasiado (máx. 5 MB)","err");btn.disabled=false;btn.textContent="💾 Guardar cambios de mi ficha";return;}
+      btn.textContent="Subiendo foto…";
+      fotoUrl=await subirFotoPerfil(f);
+      btn.textContent="Guardando…";
+    }
+    await callRPC("psi_editar_perfil",{p_id:id,p_clave:clave,
+      p_foto_url:fotoUrl,p_bio:($("mf-bio").value||"").trim()||null,
+      p_especialidades:($("mf-esp").value||"").trim()||null,p_horarios:($("mf-horarios").value||"").trim()||null,
+      p_instagram:(($("mf-ig").value||"").trim().replace(/^@/,""))||null,p_whatsapp:($("mf-wa").value||"").trim()||null});
+    try{localStorage.setItem(MI_ID_KEY,id);}catch(e){}
+    toast("✅ Ficha actualizada","ok");cerrarSheets();refrescarProfs();
+  }catch(err){toast(err&&err.message==="foto"?"No se pudo subir la foto. Prueba con una JPG/PNG más liviana.":motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="💾 Guardar cambios de mi ficha";}
+});
 async function miFichaAccion(online){
   const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
   if(!id){toast("Elige tu nombre en la lista","err");return;}
