@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f4fa">
+<meta name="description" content="Psicólogos, psiquiatras, terapeutas y voluntarios dispuestos a escucharte después del sismo en Venezuela. Haz un test de ansiedad, agenda una consulta o deja una petición de apoyo. Gratuito y comunitario.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="preconnect" href="https://ozuxfepfkvnxkywdsqxy.supabase.co" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Psicólogos en Venezuela · Apoyo emocional después del sismo</title>
+<style>
+  :root{
+    --bg:#f5f4fa; --surface:#ffffff; --surface-2:#efeef6;
+    --ink:#171224; --ink-2:#3b3450; --muted:#6b6480;
+    --line:rgba(59,52,80,.16); --line-2:rgba(59,52,80,.09);
+    --brand:#6d4fe0; --brand-deep:#4e35b5; --brand-soft:#efe9ff;
+    --teal:#0a8d8f; --teal-soft:#dff4f3;
+    --blue:#0a6cff; --blue-soft:#e6f0ff;
+    --ok:#0f8a45; --ok-bg:#e4f6ea; --warn:#b5630a; --warn-bg:#fcecd6;
+    --bad:#cc2a20; --bad-bg:#fce7e5; --unk:#6b6480; --unk-bg:#eceaf2;
+    --shadow-s:0 1px 2px rgba(43,31,102,.05),0 2px 6px rgba(43,31,102,.05);
+    --shadow-m:0 2px 8px rgba(43,31,102,.05),0 16px 40px rgba(43,31,102,.11);
+    --shadow-l:0 -2px 12px rgba(43,31,102,.06),0 -24px 60px rgba(43,31,102,.22);
+    --shadow-card:0 2px 8px rgba(43,31,102,.05),0 14px 36px rgba(43,31,102,.09);
+    --shadow-pop:0 24px 56px -8px rgba(43,31,102,.24);
+    --shadow-btn:0 2px 4px rgba(109,79,224,.16),0 8px 20px rgba(109,79,224,.30);
+    --ring:0 0 0 4px var(--brand-soft);
+    --grad-brand:linear-gradient(150deg,#8b6cff,#5b3fd6);
+    --sans:"Poppins",-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --r-card:1.1rem; --r-fld:.85rem; --r-btn:.75rem; --r-pill:999px;
+    --ease:cubic-bezier(.32,.72,0,1);
+  }
+  html{font-size:18px}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.5;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;font-size:1rem}
+  .wrap{max-width:600px;margin:0 auto;padding:0 1rem 6rem}
+  button{font-family:inherit}
+  a{color:var(--brand-deep)}
+  h1,h2,h3{letter-spacing:-.02em}
+
+  /* ===== Header ===== */
+  header.app{position:sticky;top:0;z-index:30;background:rgba(245,244,250,.82);
+    -webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);
+    border-bottom:1px solid var(--line-2);padding-top:env(safe-area-inset-top,0)}
+  .bar-in{max-width:600px;margin:0 auto;padding:.6rem 1rem .5rem;display:flex;align-items:center;gap:.6rem}
+  .brand{display:flex;align-items:center;gap:.55rem;min-width:0}
+  .mark{flex:none;width:2.3rem;height:2.3rem;border-radius:.7rem;background:var(--grad-brand);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(109,79,224,.22),0 6px 16px rgba(109,79,224,.38)}
+  .mark svg{width:1.35rem;height:1.35rem}
+  .brand-tt{min-width:0}
+  .brand-tt h1{margin:0;font-size:1.02rem;font-weight:800;line-height:1.1}
+  .brand-tt p{margin:.05rem 0 0;font-size:.72rem;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar-actions{margin-left:auto;display:flex;align-items:center;gap:.4rem;flex:none}
+  .az{display:flex;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-pill);overflow:hidden;box-shadow:var(--shadow-s)}
+  .az button{border:none;background:none;cursor:pointer;color:var(--ink-2);font-weight:800;padding:.5rem .6rem;line-height:1}
+  .az button:active{background:var(--surface-2)}
+  .az .a-sm{font-size:.78rem}.az .a-lg{font-size:1.05rem}
+  .az span.div{width:1px;align-self:stretch;background:var(--line-2)}
+  .icon-btn{width:2.5rem;height:2.5rem;border-radius:.7rem;border:1px solid var(--line);background:var(--surface);
+    color:var(--ink-2);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-s);
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+  .icon-btn:active{transform:scale(.94)}.icon-btn svg{width:1.2rem;height:1.2rem}
+
+  .segwrap{max-width:600px;margin:0 auto;padding:0 1rem .6rem}
+  .segmented{display:flex;gap:.2rem;background:#e6e3f0;border-radius:.85rem;padding:.25rem;position:relative}
+  .seg{flex:1;border:none;background:none;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--ink-2);
+    padding:.65rem .2rem;border-radius:.65rem;display:flex;align-items:center;justify-content:center;gap:.35rem;
+    position:relative;z-index:2;transition:color .2s var(--ease);min-height:2.9rem}
+  .seg svg{width:1.05rem;height:1.05rem;flex:none}
+  .seg.on{color:var(--brand-deep)}
+  .seg-thumb{position:absolute;top:.25rem;left:.25rem;height:calc(100% - .5rem);width:calc((100% - .9rem)/3);
+    background:var(--surface);border-radius:.65rem;box-shadow:0 1px 2px rgba(23,18,36,.10),0 3px 10px rgba(23,18,36,.16);
+    transition:transform .28s var(--ease);z-index:1}
+  .segmented[data-i="1"] .seg-thumb{transform:translateX(calc(100% + .2rem))}
+  .segmented[data-i="2"] .seg-thumb{transform:translateX(calc(200% + .4rem))}
+
+  /* ===== bloques ===== */
+  .hero{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-card);padding:1.15rem;margin:.9rem 0 0;box-shadow:var(--shadow-card)}
+  .hero h2{margin:0 0 .3rem;font-size:1.32rem;line-height:1.15}
+  .hero p{margin:0;font-size:.95rem;color:var(--ink-2);line-height:1.5}
+  .privacy{display:flex;gap:.6rem;align-items:flex-start;background:var(--blue-soft);border:1px solid #cfe0ff;color:#143b73;
+    font-size:.86rem;padding:.75rem .85rem;border-radius:var(--r-card);margin-top:.8rem;line-height:1.45}
+  .privacy svg{flex:none;width:1.25rem;height:1.25rem;margin-top:.05rem;color:var(--blue)}
+  .privacy b{color:#0a2a57}
+  .alert{display:flex;gap:.6rem;align-items:flex-start;background:#fff7ec;border:1px solid #f4dcb6;color:#7a4d12;
+    font-size:.86rem;padding:.7rem .8rem;border-radius:var(--r-card);margin:.9rem 0 .2rem;line-height:1.45}
+  .alert svg{flex:none;width:1.2rem;height:1.2rem;margin-top:.05rem;color:var(--warn)}
+  .alert b{color:#6a3d0a}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.85rem 0 0}
+  .stat{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-card);padding:.85rem .5rem;text-align:center;box-shadow:var(--shadow-card)}
+  .stat .num{display:block;font-size:1.6rem;font-weight:800;color:var(--brand-deep);letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums}
+  .stat .lbl{display:block;font-size:.72rem;color:var(--muted);font-weight:700;margin-top:.2rem;line-height:1.2}
+  .livedot{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;background:#16a34a;vertical-align:-1px;margin-right:.15rem;animation:lpulse 2.2s ease-out infinite}
+  @keyframes lpulse{0%{box-shadow:0 0 0 0 rgba(22,163,74,.45)}70%{box-shadow:0 0 0 .5rem rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+
+  .searchbox{position:relative;margin-top:.85rem}
+  .searchbox svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:1.3rem;height:1.3rem;color:var(--muted);pointer-events:none}
+  .search{width:100%;font-size:1.05rem;font-family:var(--sans);padding:1rem 1rem 1rem 2.9rem;border:1.5px solid var(--line);
+    border-radius:var(--r-fld);background:var(--surface);color:var(--ink);box-shadow:var(--shadow-s);min-height:3.3rem}
+  .search::placeholder{color:var(--muted)}
+  .search:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+  .selrow{display:flex;gap:.5rem;margin-top:.7rem;flex-wrap:wrap}
+  .selrow select{flex:1;min-width:calc(50% - .25rem);font-size:.95rem;font-family:var(--sans);padding:.7rem .8rem;border:1.5px solid var(--line);
+    border-radius:var(--r-fld);background:var(--surface);color:var(--ink);box-shadow:var(--shadow-s);-webkit-appearance:none;appearance:none;min-height:2.9rem;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6480' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .8rem center;padding-right:2.1rem}
+  .selrow select:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+  .chips{display:flex;gap:.45rem;align-items:center;margin-top:.7rem;flex-wrap:wrap}
+  .chip{font-size:.88rem;font-weight:700;padding:.55rem 1rem;border-radius:var(--r-pill);border:1.5px solid var(--line);
+    background:var(--surface);color:var(--ink-2);cursor:pointer;box-shadow:var(--shadow-s);min-height:2.4rem;
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease),background .15s,color .15s,border-color .15s}
+  .chip.on{background:var(--grad-brand);border-color:var(--brand);color:#fff;box-shadow:var(--shadow-btn)}
+  .count{font-size:.82rem;color:var(--muted);margin:.85rem .2rem .2rem;font-weight:700}
+
+  /* ===== tarjetas profesional / petición ===== */
+  ul.list{list-style:none;margin:.4rem 0 0;padding:0;display:flex;flex-direction:column;gap:.7rem}
+  .card{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-card);padding:1rem 1.05rem;box-shadow:var(--shadow-card)}
+  @media (hover:hover){
+    .card{transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+    .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-pop)}
+  }
+  .card-top{display:flex;justify-content:space-between;gap:.7rem;align-items:flex-start}
+  .name{font-size:1.06rem;font-weight:800;margin:0;line-height:1.25}
+  .sub{font-size:.85rem;color:var(--muted);margin:.3rem 0 0;display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;font-weight:600}
+  .tag{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;background:var(--surface-2);color:var(--ink-2);padding:.14rem .5rem;border-radius:.4rem}
+  .tag.t-psicologo{background:var(--brand-soft);color:var(--brand-deep)}
+  .tag.t-psiquiatra{background:var(--blue-soft);color:#143b73}
+  .tag.t-terapeuta{background:var(--teal-soft);color:#076d6f}
+  .tag.t-voluntario{background:var(--ok-bg);color:var(--ok)}
+  .tag.t-gratis{background:var(--ok-bg);color:var(--ok)}
+  .badge{flex:none;font-size:.78rem;font-weight:800;padding:.4rem .7rem;border-radius:var(--r-pill);white-space:nowrap;display:inline-flex;align-items:center;gap:.35rem}
+  .badge .d{width:.5rem;height:.5rem;border-radius:50%;background:currentColor}
+  .b-on{background:var(--ok-bg);color:var(--ok)}.b-off{background:var(--unk-bg);color:var(--unk)}
+  .b-urg{background:var(--bad-bg);color:var(--bad)}.b-nor{background:var(--unk-bg);color:var(--unk)}
+  .b-tom{background:var(--blue-soft);color:#143b73}
+  .vline{display:flex;align-items:center;gap:.4rem;font-size:.84rem;font-weight:700;color:var(--ok);margin-top:.55rem}
+  .vline svg{width:1rem;height:1rem;flex:none}
+  .vline a{color:var(--brand-deep);font-weight:700}
+  .cred{font-size:.85rem;color:var(--ink-2);margin-top:.45rem;background:var(--surface-2);border-radius:.7rem;padding:.55rem .7rem;line-height:1.5}
+  .cred a{font-weight:700}
+  .bio{font-size:.9rem;color:var(--ink-2);margin-top:.6rem;line-height:1.5}
+  .meta{font-size:.8rem;color:var(--muted);margin-top:.55rem;font-weight:600;line-height:1.5}
+  .row-actions{display:flex;gap:.5rem;margin-top:.85rem;flex-wrap:wrap}
+  .act{font-size:.9rem;font-weight:700;padding:.65rem 1rem;border-radius:var(--r-pill);cursor:pointer;border:1.5px solid var(--line);
+    background:var(--surface);color:var(--brand-deep);display:inline-flex;align-items:center;gap:.4rem;box-shadow:var(--shadow-s);min-height:2.6rem;
+    text-decoration:none;transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+  .act svg{width:1.05rem;height:1.05rem}
+  .act.wa{background:#e9fbf0;border-color:#a7e8c0;color:#0b6b34}
+  .flag{margin-top:.5rem;border:none;background:none;color:var(--muted);font-size:.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;padding:.4rem 0}
+  .flag svg{width:.95rem;height:.95rem}
+  .flag:active{color:var(--bad)}
+  .empty{text-align:center;color:var(--muted);padding:2.4rem 1rem;font-size:.95rem;line-height:1.5}
+  .empty svg{width:2.6rem;height:2.6rem;color:#b6aecf;margin-bottom:.6rem}
+  .empty b{color:var(--ink-2)}
+  .skel{height:6rem;border-radius:var(--r-card);background:linear-gradient(90deg,#e9e6f2,#f3f1f9,#e9e6f2);background-size:200% 100%;animation:sh 1.3s infinite;list-style:none}
+  @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  /* ===== botones ===== */
+  .btn-xl{width:100%;border:none;background:var(--grad-brand);color:#fff;font-weight:800;font-size:1.08rem;padding:1rem;
+    border-radius:var(--r-btn);cursor:pointer;box-shadow:var(--shadow-btn);min-height:3.4rem;
+    display:flex;align-items:center;justify-content:center;gap:.5rem;transition:transform .15s var(--ease),box-shadow .15s var(--ease),filter .15s}
+  .btn-xl:active{transform:scale(.98)}.btn-xl:disabled{opacity:.5;box-shadow:none}
+  .btn-xl svg{width:1.3rem;height:1.3rem}
+  .cta{width:100%;margin-top:1rem;border:1.5px dashed var(--brand);color:var(--brand-deep);background:var(--surface);
+    font-weight:800;font-size:1rem;padding:1.05rem;border-radius:var(--r-card);cursor:pointer;min-height:3.4rem;
+    display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:var(--shadow-s);
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+  .cta:active{transform:scale(.985)}.cta svg{width:1.3rem;height:1.3rem}
+  .cta.solid{border-style:solid;background:var(--brand-soft)}
+  .send{width:100%;border:none;background:var(--grad-brand);color:#fff;font-weight:800;font-size:1.05rem;padding:.95rem;
+    border-radius:var(--r-btn);cursor:pointer;box-shadow:var(--shadow-btn);min-height:3.3rem;
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease),filter .15s}
+  .send:disabled{opacity:.5;box-shadow:none}
+  .send.dark{background:linear-gradient(150deg,#2e2745,#171224);box-shadow:0 2px 4px rgba(23,18,36,.18),0 8px 20px rgba(23,18,36,.30)}
+  .send:active{transform:scale(.98)}
+  .cancel{width:100%;border:none;background:none;color:var(--muted);font-size:.95rem;font-weight:700;padding:.8rem;cursor:pointer;margin-top:.1rem;min-height:2.8rem}
+  @media (hover:hover){
+    .btn-xl:hover,.send:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    .cta:hover,.act:hover,.chip:hover,.icon-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-m)}
+  }
+  .btn-xl:focus-visible,.send:focus-visible,.cta:focus-visible,.act:focus-visible,.chip:focus-visible,.icon-btn:focus-visible,
+  .seg:focus-visible,.az button:focus-visible,.opt:focus-visible,.flag:focus-visible{outline:none;box-shadow:var(--ring)}
+
+  /* ===== QUIZ ===== */
+  .quiz-card{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-card);padding:1.15rem;margin-top:.9rem;box-shadow:var(--shadow-card)}
+  .q-progress{height:.45rem;background:var(--surface-2);border-radius:99px;overflow:hidden;margin:.6rem 0 1rem}
+  .q-bar{height:100%;width:0%;background:var(--grad-brand);border-radius:99px;transition:width .3s var(--ease)}
+  .q-step{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .q-title{font-size:1.12rem;font-weight:800;margin:.3rem 0 .9rem;line-height:1.35}
+  .opts{display:flex;flex-direction:column;gap:.5rem}
+  .opt{width:100%;text-align:left;font-size:.95rem;font-weight:700;padding:.85rem .9rem;border-radius:.8rem;
+    border:1.5px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer;min-height:3rem;
+    display:flex;align-items:center;gap:.6rem;transition:transform .12s var(--ease),background .15s,border-color .15s,color .15s,box-shadow .15s}
+  .opt .dot{flex:none;width:1.15rem;height:1.15rem;border-radius:50%;border:2px solid var(--line)}
+  .opt.sel{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-deep)}
+  .opt.sel .dot{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 3px #fff}
+  .opt:active{transform:scale(.99)}
+  .q-nav{display:flex;gap:.5rem;margin-top:1rem}
+  .q-nav .send{flex:1}
+  .q-back{flex:none;width:3.3rem;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-btn);cursor:pointer;color:var(--ink-2);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-s)}
+  .q-back svg{width:1.2rem;height:1.2rem}
+  .q-back:disabled{opacity:.4}
+  .res-band{border-radius:var(--r-card);padding:1.1rem;margin-top:.9rem;border:1.5px solid}
+  .res-band h3{margin:0 0 .3rem;font-size:1.15rem}
+  .res-band p{margin:.3rem 0 0;font-size:.92rem;line-height:1.55}
+  .res-min{background:var(--ok-bg);border-color:#bfe6c9;color:#14532d}
+  .res-leve{background:#fefce8;border-color:#fde68a;color:#713f12}
+  .res-mod{background:var(--warn-bg);border-color:#f4c98a;color:#7a4d12}
+  .res-sev{background:var(--bad-bg);border-color:#f3bcbc;color:#7f1d1d}
+  .res-tips{margin:.8rem 0 0;padding-left:1.15rem;font-size:.9rem;line-height:1.6;color:var(--ink-2)}
+  .res-tips li{margin:.35rem 0}
+
+  /* ===== sheets ===== */
+  .scrim{position:fixed;inset:0;background:rgba(23,18,36,.46);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
+    display:none;z-index:50;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s var(--ease)}
+  .scrim.open{display:flex;opacity:1}
+  .sheet{background:var(--surface);width:100%;max-width:600px;border-radius:1.5rem 1.5rem 0 0;
+    padding:.6rem 1.15rem calc(1.6rem + env(safe-area-inset-bottom,0));max-height:94vh;overflow:auto;box-shadow:var(--shadow-l);
+    transform:translateY(100%);transition:transform .34s var(--ease)}
+  .scrim.open .sheet{transform:translateY(0)}
+  .grip{width:2.4rem;height:.3rem;border-radius:99px;background:#d6d2e2;margin:0 auto .8rem}
+  .sheet h2{margin:.1rem 0 .2rem;font-size:1.35rem}
+  .sheet p.hint{margin:0 0 1rem;font-size:.92rem;color:var(--muted);line-height:1.5}
+  .sheet label{display:block;font-size:.88rem;font-weight:800;color:var(--ink-2);margin:0 0 .4rem}
+  .sheet .help{font-size:.8rem;color:var(--muted);margin:-.4rem 0 .7rem;font-weight:600;line-height:1.5}
+  .fld{width:100%;font-size:1rem;font-family:var(--sans);padding:.85rem;border:1.5px solid var(--line);
+    border-radius:var(--r-fld);background:var(--surface);color:var(--ink);margin-bottom:.7rem;min-height:3rem}
+  .fld::placeholder{color:var(--muted)}
+  .fld:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+  textarea.fld{min-height:5rem;resize:vertical}
+  .check{display:flex;gap:.6rem;align-items:flex-start;font-size:.88rem;color:var(--ink-2);margin:.2rem 0 1rem;cursor:pointer;line-height:1.45}
+  .check input{margin-top:.15rem;width:1.3rem;height:1.3rem;accent-color:var(--brand);flex:none}
+  .fpv-note{font-size:.84rem;background:var(--brand-soft);border:1px solid #d9ccff;color:#3b2d80;border-radius:.8rem;padding:.7rem .8rem;margin:.2rem 0 .9rem;line-height:1.55}
+  .fpv-note a{font-weight:800}
+  .clave-box{background:#fff7ec;border:2px solid #f4c98a;border-radius:.9rem;padding:1rem;margin:.6rem 0;text-align:center}
+  .clave-box .cl{font-size:2rem;font-weight:800;letter-spacing:.35em;color:var(--ink);font-variant-numeric:tabular-nums;margin:.3rem 0}
+  .clave-box p{margin:.2rem 0;font-size:.85rem;color:#7a4d12;line-height:1.5}
+  .rolemenu{display:flex;flex-direction:column;gap:.7rem;margin-bottom:.3rem}
+  .role{display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;cursor:pointer;background:var(--surface-2);
+    border:1px solid var(--line-2);border-radius:1rem;padding:1rem;min-height:4rem;box-shadow:var(--shadow-s);
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+  .role.primary{background:var(--brand-soft);border-color:#d9ccff}
+  .role .ri{flex:none;width:3rem;height:3rem;border-radius:.85rem;display:flex;align-items:center;justify-content:center;color:#fff}
+  .role .ri svg{width:1.5rem;height:1.5rem}
+  .role .rt{flex:1;min-width:0}.role .rt b{display:block;font-size:1.02rem}
+  .role .rt span{display:block;font-size:.85rem;color:var(--muted);margin-top:.1rem;font-weight:600}
+  .role .rc svg{width:1.2rem;height:1.2rem;color:var(--muted)}
+  .ri.c-brand{background:var(--grad-brand)}
+  .ri.c-teal{background:linear-gradient(150deg,#13b6b7,#086e70)}
+  .ri.c-warn{background:linear-gradient(150deg,#e08a16,#b9650a)}
+
+  footer{margin-top:2rem;padding-top:1.1rem;border-top:1px solid var(--line-2);font-size:.84rem;color:var(--muted);line-height:1.55}
+  footer b{color:var(--ink-2)}
+  .nums{display:flex;gap:.5rem;margin-top:.7rem;flex-wrap:wrap}
+  .num{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-pill);
+    padding:.55rem .9rem;font-weight:800;color:var(--ink);text-decoration:none;box-shadow:var(--shadow-s)}
+  .num svg{width:1rem;height:1rem;color:var(--bad)}
+
+  /* tarjeta aliada (Hospitales en Venezuela) */
+  .ally{display:block;margin-top:1rem;border-radius:var(--r-card);padding:1.15rem;color:#fff;text-decoration:none;
+    background:linear-gradient(145deg,#13b6b7,#076d6f);box-shadow:0 2px 6px rgba(8,110,112,.2),0 12px 28px rgba(8,110,112,.32);
+    transition:transform .15s var(--ease)}
+  .ally:active{transform:scale(.99)}
+  .ally .at{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+  .ally .ai{flex:none;width:2.3rem;height:2.3rem;border-radius:.7rem;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center}
+  .ally .ai svg{width:1.35rem;height:1.35rem;color:#fff}
+  .ally h3{margin:0;font-size:1.1rem;color:#fff}
+  .ally p{margin:0 0 .9rem;font-size:.92rem;line-height:1.5;color:#dcf5f4}
+  .ally .go{display:flex;align-items:center;justify-content:center;gap:.5rem;background:#fff;color:#076d6f;font-weight:800;
+    font-size:1rem;padding:.85rem;border-radius:.8rem;min-height:3.1rem}
+  .ally .go svg{width:1.1rem;height:1.1rem}
+
+  .share-fab{position:fixed;right:1rem;bottom:calc(1.1rem + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:.45rem;
+    padding:.7rem 1rem;border-radius:2rem;border:none;cursor:pointer;background:var(--grad-brand);color:#fff;font-weight:800;font-size:.92rem;
+    box-shadow:0 8px 22px rgba(91,63,214,.4);z-index:95;transition:transform .15s var(--ease)}
+  .share-fab:active{transform:scale(.95)}.share-fab svg{width:1.2rem;height:1.2rem}
+
+  .hide{display:none !important}
+  #toast{position:fixed;left:50%;transform:translateX(-50%) translateY(.5rem);bottom:1.6rem;background:var(--ink);color:#fff;
+    font-size:.95rem;font-weight:700;padding:.85rem 1.2rem;border-radius:.9rem;z-index:80;opacity:0;pointer-events:none;
+    transition:opacity .25s,transform .25s var(--ease);max-width:90%;text-align:center;box-shadow:0 12px 32px rgba(23,18,36,.32)}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  #toast.err{background:var(--bad)}#toast.ok{background:var(--ok)}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="app">
+  <div class="bar-in">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9.5 3A5.5 5.5 0 0 0 4 8.5c0 1.9.6 2.9 1.5 4L12 20l6.5-7.5c.9-1.1 1.5-2.1 1.5-4A5.5 5.5 0 0 0 14.5 3c-1 0-2 .4-2.5 1-.5-.6-1.5-1-2.5-1z" fill="#fff"/></svg></span>
+    <div class="brand-tt">
+      <h1>Psicólogos en Venezuela</h1>
+      <p>Apoyo emocional después del sismo</p>
+    </div>
+    <div class="bar-actions">
+      <div class="az" role="group" aria-label="Tamaño de letra">
+        <button id="a-minus" class="a-sm" aria-label="Reducir letra">A−</button>
+        <span class="div"></span>
+        <button id="a-plus" class="a-lg" aria-label="Aumentar letra">A+</button>
+      </div>
+      <button id="btn-guia" class="icon-btn" aria-label="Cómo funciona">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="segwrap">
+    <div class="segmented" id="segmented" data-i="0" role="tablist">
+      <span class="seg-thumb"></span>
+      <button class="seg on" data-view="apoyo" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="8" r="3.4"/><path d="M5 20a6 6 0 0 1 12 0"/><path d="M19 8v6M22 11h-6"/></svg>
+        Profesionales
+      </button>
+      <button class="seg" data-view="test" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"/></svg>
+        Test
+      </button>
+      <button class="seg" data-view="mural" role="tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Mural
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===================== APOYO (directorio) ===================== -->
+  <section id="view-apoyo">
+    <div class="hero">
+      <h2>¿Necesitas hablar con alguien?</h2>
+      <p>Después de un sismo es normal sentir miedo, ansiedad, tristeza o no poder dormir. Aquí hay <b>psicólogos, psiquiatras, terapeutas y voluntarios dispuestos a escucharte</b> — muchos de forma gratuita. Busca a alguien disponible, escríbele por WhatsApp o agenda una consulta.</p>
+      <button id="cta-test" class="btn-xl" style="margin-top:1rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"/></svg>
+        ¿Cómo estoy? — Test de ansiedad (2 min)
+      </button>
+    </div>
+
+    <div class="stats" id="stats" aria-live="polite">
+      <div class="stat"><span class="num" id="stat-prof">—</span><span class="lbl">profesionales y voluntarios</span></div>
+      <div class="stat" style="border-color:#bfe6c9;background:#f2fbf5"><span class="num" id="stat-on" style="color:#0f8a45">—</span><span class="lbl"><span class="livedot"></span>disponibles ahora</span></div>
+      <div class="stat"><span class="num" id="stat-pet">—</span><span class="lbl">peticiones abiertas</span></div>
+    </div>
+
+    <div class="privacy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>
+      <div><b>La credencial FPV es información pública.</b> Todo psicólogo colegiado en Venezuela aparece en el registro de la Federación de Psicólogos. Puedes verificar cualquier número FPV en <a href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer">sistema.fpv.org.ve</a>.</div>
+    </div>
+
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" class="search" type="search" inputmode="search" placeholder="Nombre, especialidad o ciudad…" autocomplete="off" aria-label="Buscar profesional">
+    </div>
+    <div class="selrow">
+      <select id="f-tipo" aria-label="Filtrar por tipo">
+        <option value="">Todos</option>
+        <option value="psicologo">Psicólogos</option>
+        <option value="psiquiatra">Psiquiatras</option>
+        <option value="terapeuta">Terapeutas</option>
+        <option value="voluntario">Voluntarios que escuchan</option>
+      </select>
+      <select id="f-estado" aria-label="Filtrar por estado"><option value="">Todos los estados</option></select>
+    </div>
+    <div class="chips">
+      <button class="chip on" data-fil="todos">Todos</button>
+      <button class="chip" data-fil="online">🟢 Disponibles ahora</button>
+      <button class="chip" data-fil="gratis">Gratuitos</button>
+      <button class="chip" data-fil="verificados">✓ Verificados</button>
+    </div>
+    <div id="count" class="count"></div>
+    <ul id="list" class="list" aria-live="polite"><li class="skel"></li><li class="skel"></li><li class="skel"></li></ul>
+    <div id="empty" class="empty hide"></div>
+
+    <button id="cta-prof" class="cta solid">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      Soy profesional o voluntario — registrarme
+    </button>
+    <button id="cta-mi-ficha" class="cta" style="margin-top:.6rem;font-size:.95rem;padding:.9rem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg>
+      Ya estoy registrado — gestionar mi ficha
+    </button>
+
+    <footer>
+      <p><b>Plataforma comunitaria y gratuita.</b> Conectamos personas con profesionales y voluntarios que ofrecen su tiempo. No sustituye la atención médica de emergencia ni verifica cada dato: <b>confirma siempre la credencial</b> del profesional en el registro público. Si tú o alguien está en peligro inmediato, llama a emergencias.</p>
+      <div class="nums">
+        <a class="num" href="tel:171"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.3a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.25 1z"/></svg>Emergencias 171</a>
+        <a class="num" href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer" style="color:var(--brand-deep)">✓ Verificar FPV</a>
+      </div>
+    </footer>
+
+    <a class="ally" href="https://hospitalesenvenezuela.com" target="_blank" rel="noopener noreferrer">
+      <div class="at">
+        <span class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M12 9.5v3M10.5 11h3"/></svg></span>
+        <h3>¿Buscas a un familiar ingresado?</h3>
+      </div>
+      <p>En <b>Hospitales en Venezuela</b> puedes buscar por nombre o cédula a personas ingresadas en hospitales y centros de salud tras el sismo, y ver los centros operativos cerca de ti.</p>
+      <span class="go">Ir a hospitalesenvenezuela.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+    </a>
+  </section>
+
+  <!-- ===================== TEST ===================== -->
+  <section id="view-test" class="hide">
+    <div class="hero">
+      <h2>¿Cómo estás tú?</h2>
+      <p>Perder a alguien, sobrevivir a un terremoto, quedarte sin casa o no poder volver a trabajar deja huellas que no siempre se ven. Este test corto (<b>escala GAD-7</b>, usada por profesionales en todo el mundo) te ayuda a ponerle nombre a lo que sientes. <b>Es anónimo</b>: tus respuestas no salen de tu teléfono.</p>
+    </div>
+    <div class="quiz-card" id="quiz">
+      <!-- se pinta con JS -->
+    </div>
+    <div class="alert" style="margin-top:.9rem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      <div>Este test es <b>orientativo, no es un diagnóstico</b>. Si te sientes en peligro o piensas en hacerte daño, no esperes el resultado: llama a <a href="tel:171">171</a> o acude al centro de salud más cercano. No estás solo/a.</div>
+    </div>
+  </section>
+
+  <!-- ===================== MURAL ===================== -->
+  <section id="view-mural" class="hide">
+    <div class="hero">
+      <h2>Mural de peticiones</h2>
+      <p>¿Tu <b>hospital, colegio, centro de acopio o refugio</b> necesita apoyo psicológico para las personas que atiende? ¿O tú mismo quieres que un profesional te contacte? Deja tu petición aquí — los profesionales la ven y la toman.</p>
+      <button id="cta-peticion" class="btn-xl" style="margin-top:1rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        Pedir apoyo psicológico
+      </button>
+    </div>
+    <div class="privacy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>
+      <div>Por privacidad, el <b>teléfono del solicitante va oculto</b> (····1234). Solo el profesional que toma la petición lo recibe completo, identificándose con su nombre y credencial.</div>
+    </div>
+    <div class="chips">
+      <button class="chip on" data-mfil="todas">Todas</button>
+      <button class="chip" data-mfil="abierta">Abiertas</button>
+      <button class="chip" data-mfil="urgente">🔴 Urgentes</button>
+      <button class="chip" data-mfil="institucion">Instituciones</button>
+    </div>
+    <div id="mcount" class="count"></div>
+    <ul id="mlist" class="list" aria-live="polite"><li class="skel"></li><li class="skel"></li></ul>
+    <div id="mempty" class="empty hide"></div>
+  </section>
+</div>
+
+<!-- ===================== SHEETS ===================== -->
+<div id="sheet-prof" class="scrim" role="dialog" aria-modal="true" aria-label="Registro de profesional">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>Registro de profesional</h2>
+    <p class="hint">Súmate a la red de apoyo emocional. Tu ficha será pública para que las personas puedan contactarte.</p>
+    <label for="pr-nombre">Nombre y apellido *</label>
+    <input id="pr-nombre" class="fld" maxlength="120" placeholder="Ej: Vanessa Rodríguez Reggeti" autocomplete="name">
+    <label for="pr-tipo">¿Cómo ayudas? *</label>
+    <select id="pr-tipo" class="fld">
+      <option value="psicologo">Psicólogo/a (requiere FPV)</option>
+      <option value="psiquiatra">Psiquiatra (requiere credencial MPPS/colegio médico)</option>
+      <option value="terapeuta">Terapeuta</option>
+      <option value="voluntario">Voluntario/a dispuesto a escuchar</option>
+    </select>
+    <div id="pr-cred-box">
+      <label for="pr-cred">Credencial <span id="pr-cred-req">*</span></label>
+      <input id="pr-cred" class="fld" maxlength="60" placeholder="Ej: FPV 19976">
+      <div class="fpv-note">🔎 <b>Verificamos las credenciales contra el registro público.</b> El número FPV de todo psicólogo colegiado puede consultarse en <a href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer">sistema.fpv.org.ve/consulta-psicologos</a> — es información pública. Las fichas con credencial confirmada reciben la insignia <b>✓ Verificado</b>.</div>
+    </div>
+    <label for="pr-wa">WhatsApp (será público para que te contacten) *</label>
+    <input id="pr-wa" class="fld" inputmode="tel" maxlength="40" placeholder="Ej: 0412-0221090">
+    <label for="pr-ig">Instagram (opcional)</label>
+    <input id="pr-ig" class="fld" maxlength="120" placeholder="Ej: @psicologa.vanessa">
+    <div class="selrow" style="margin:0 0 .7rem">
+      <select id="pr-modalidad" class="fld" style="margin:0">
+        <option value="online">Atiendo online</option>
+        <option value="presencial">Atiendo presencial</option>
+        <option value="ambas" selected>Online y presencial</option>
+      </select>
+    </div>
+    <label for="pr-estado">Estado *</label>
+    <input id="pr-estado" class="fld" list="estados-dl" maxlength="40" placeholder="Ej: Distrito Capital">
+    <datalist id="estados-dl"></datalist>
+    <label for="pr-ciudad">Ciudad *</label>
+    <input id="pr-ciudad" class="fld" maxlength="80" placeholder="Ej: Caracas">
+    <label for="pr-horarios">Horas disponibles</label>
+    <input id="pr-horarios" class="fld" maxlength="240" placeholder="Ej: Lun–Vie 4–8 pm · Sáb en la mañana">
+    <label for="pr-esp">Especialidades (opcional)</label>
+    <input id="pr-esp" class="fld" maxlength="240" placeholder="Ej: Ansiedad · Duelo · Niños · Trauma">
+    <label for="pr-bio">Preséntate en pocas líneas (opcional)</label>
+    <textarea id="pr-bio" class="fld" rows="3" maxlength="400" placeholder="Ej: Acompaño procesos de duelo y crisis. Un espacio seguro, sin juicio."></textarea>
+    <label class="check"><input type="checkbox" id="pr-gratis"><span>Ofrezco <b>atención gratuita</b> a afectados por el sismo (puedes cambiarlo luego).</span></label>
+    <label class="check"><input type="checkbox" id="pr-visitas"><span>Estoy dispuesto/a a <b>visitar hospitales, colegios o centros de acopio</b> si me lo piden.</span></label>
+    <label class="check"><input type="checkbox" id="pr-consent"><span>Autorizo publicar estos datos (incluido mi WhatsApp) en el directorio, con el fin de brindar apoyo emocional. *</span></label>
+    <button id="pr-send" class="send">Registrarme en la red</button>
+    <button class="cancel" data-close>Cancelar</button>
+  </div>
+</div>
+
+<div id="sheet-clave" class="scrim" role="dialog" aria-modal="true" aria-label="Tu clave">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>✅ ¡Ya estás en la red!</h2>
+    <p class="hint">Guarda tu <b>clave de gestión</b>. La necesitas para marcarte disponible, cambiar tus horarios y ver quién pidió cita contigo. <b>Solo se muestra esta vez.</b></p>
+    <div class="clave-box">
+      <p>Tu clave de gestión</p>
+      <div class="cl" id="clave-num">——————</div>
+      <p>Anótala o tómale captura ahora.</p>
+    </div>
+    <button id="clave-copy" class="send dark">Copiar clave</button>
+    <button class="send" data-close style="margin-top:.6rem">Ya la guardé</button>
+  </div>
+</div>
+
+<div id="sheet-ficha" class="scrim" role="dialog" aria-modal="true" aria-label="Gestionar mi ficha">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>Gestionar mi ficha</h2>
+    <p class="hint">Márcate disponible cuando puedas atender, actualiza tus horas y revisa las citas que te pidieron.</p>
+    <label for="mf-prof">¿Quién eres?</label>
+    <select id="mf-prof" class="fld"><option value="">Elige tu nombre…</option></select>
+    <label for="mf-clave">Tu clave de gestión *</label>
+    <input id="mf-clave" class="fld" inputmode="numeric" maxlength="6" placeholder="La clave de 6 dígitos que guardaste">
+    <label for="mf-horarios">Actualizar horas disponibles (opcional)</label>
+    <input id="mf-horarios" class="fld" maxlength="240" placeholder="Ej: Esta semana: Lun–Mié 5–9 pm">
+    <div style="display:flex;gap:.5rem">
+      <button id="mf-on" class="send" style="flex:1">🟢 Estoy disponible</button>
+      <button id="mf-off" class="send dark" style="flex:1">Apagar disponible</button>
+    </div>
+    <button id="mf-citas" class="send" style="margin-top:.6rem;background:var(--surface);color:var(--brand-deep);border:1.5px solid var(--line);box-shadow:var(--shadow-s)">📋 Ver mis citas</button>
+    <div id="mf-citas-list"></div>
+    <button class="cancel" data-close>Cerrar</button>
+  </div>
+</div>
+
+<div id="sheet-cita" class="scrim" role="dialog" aria-modal="true" aria-label="Agendar cita">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2 id="cita-title">Agendar con…</h2>
+    <p class="hint">Deja tus datos y el profesional te contacta. Si tiene WhatsApp visible, también puedes escribirle directo.</p>
+    <label for="ci-nombre">Tu nombre *</label>
+    <input id="ci-nombre" class="fld" maxlength="120" placeholder="¿Cómo te llamas?">
+    <label for="ci-tel">Tu teléfono (WhatsApp) *</label>
+    <input id="ci-tel" class="fld" inputmode="tel" maxlength="40" placeholder="Ej: 0414-1234567">
+    <label for="ci-mod">¿Cómo prefieres?</label>
+    <select id="ci-mod" class="fld">
+      <option value="online">Online (llamada o video)</option>
+      <option value="presencial">Presencial</option>
+      <option value="visita">Que visiten mi hospital / centro / colegio</option>
+    </select>
+    <label for="ci-msg">Cuéntale algo breve (opcional)</label>
+    <textarea id="ci-msg" class="fld" rows="3" maxlength="400" placeholder="Ej: Perdí mi casa en el sismo y no estoy durmiendo bien."></textarea>
+    <button id="ci-send" class="send">Enviar solicitud de cita</button>
+    <button class="cancel" data-close>Cancelar</button>
+  </div>
+</div>
+
+<div id="sheet-peticion" class="scrim" role="dialog" aria-modal="true" aria-label="Pedir apoyo">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>Pedir apoyo psicológico</h2>
+    <p class="hint">Para ti o para tu institución. Tu teléfono se publica <b>oculto</b> — solo lo recibe el profesional que tome la petición.</p>
+    <label for="pe-quien">¿Quién pide? *</label>
+    <select id="pe-quien" class="fld">
+      <option value="persona">Una persona (yo o un familiar)</option>
+      <option value="hospital">Un hospital / centro de salud</option>
+      <option value="clinica">Una clínica</option>
+      <option value="colegio">Un colegio / escuela</option>
+      <option value="acopio">Un centro de acopio</option>
+      <option value="refugio">Un refugio</option>
+      <option value="otro">Otro</option>
+    </select>
+    <div id="pe-inst-box" class="hide">
+      <label for="pe-inst">Nombre de la institución *</label>
+      <input id="pe-inst" class="fld" maxlength="160" placeholder="Ej: Hospital Central de Maracay · U.E. San José">
+    </div>
+    <label for="pe-nombre">Tu nombre (responsable) *</label>
+    <input id="pe-nombre" class="fld" maxlength="120" placeholder="¿Quién recibe al profesional?">
+    <label for="pe-tel">Teléfono de contacto *</label>
+    <input id="pe-tel" class="fld" inputmode="tel" maxlength="40" placeholder="Se muestra oculto: ····1234">
+    <label for="pe-ayuda">¿Qué tipo de apoyo? *</label>
+    <select id="pe-ayuda" class="fld">
+      <option value="psicologica">Apoyo psicológico</option>
+      <option value="psiquiatrica">Atención psiquiátrica</option>
+      <option value="terapeutica">Terapia / contención</option>
+      <option value="escucha">Alguien que escuche</option>
+    </select>
+    <div class="selrow" style="margin:0 0 .7rem">
+      <select id="pe-urgencia" class="fld" style="margin:0">
+        <option value="normal">Puede esperar unos días</option>
+        <option value="urgente">🔴 Es urgente</option>
+      </select>
+    </div>
+    <label for="pe-estado">Estado *</label>
+    <input id="pe-estado" class="fld" list="estados-dl" maxlength="40" placeholder="Ej: Carabobo">
+    <label for="pe-ciudad">Ciudad *</label>
+    <input id="pe-ciudad" class="fld" maxlength="80" placeholder="Ej: Valencia">
+    <label for="pe-personas">¿Para cuántas personas aprox.? (opcional)</label>
+    <input id="pe-personas" class="fld" inputmode="numeric" maxlength="6" placeholder="Ej: 30">
+    <label for="pe-desc">Cuéntanos la situación *</label>
+    <textarea id="pe-desc" class="fld" rows="3" maxlength="500" placeholder="Ej: En nuestro refugio hay 25 niños que perdieron su casa y varios no duermen. Necesitamos apoyo psicológico presencial o por video."></textarea>
+    <label class="check"><input type="checkbox" id="pe-consent"><span>Autorizo publicar esta petición para que un profesional pueda contactarme. *</span></label>
+    <button id="pe-send" class="send">Publicar petición</button>
+    <button class="cancel" data-close>Cancelar</button>
+  </div>
+</div>
+
+<div id="sheet-tomar" class="scrim" role="dialog" aria-modal="true" aria-label="Tomar petición">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>Tomar esta petición</h2>
+    <p class="hint" id="tomar-sub">Identifícate como profesional. Al confirmar, recibirás el teléfono completo del solicitante y la petición quedará marcada como tomada a tu nombre.</p>
+    <label for="to-nombre">Tu nombre y apellido *</label>
+    <input id="to-nombre" class="fld" maxlength="120" placeholder="Ej: Vanessa Rodríguez Reggeti">
+    <label for="to-cred">Tu credencial (FPV / MPPS)</label>
+    <input id="to-cred" class="fld" maxlength="60" placeholder="Ej: FPV 19976 — recomendado">
+    <label for="to-tel">Tu teléfono *</label>
+    <input id="to-tel" class="fld" inputmode="tel" maxlength="40" placeholder="Por si el solicitante necesita devolverte la llamada">
+    <button id="to-send" class="send">Confirmar — dame el contacto</button>
+    <div id="to-result"></div>
+    <button class="cancel" data-close>Cancelar</button>
+  </div>
+</div>
+
+<div id="sheet-abuso" class="scrim" role="dialog" aria-modal="true" aria-label="Reportar">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>Reportar</h2>
+    <p class="hint" id="abuso-sub">Tu reporte ayuda a moderar la red.</p>
+    <label>¿Qué ocurre? *</label>
+    <div class="opts" id="abuso-op" style="flex-direction:row;flex-wrap:wrap">
+      <button class="opt" style="flex:1;min-width:8rem;justify-content:center" data-m="Credencial falsa o no verificable">Credencial falsa</button>
+      <button class="opt" style="flex:1;min-width:8rem;justify-content:center" data-m="No existe / no responde">No responde</button>
+      <button class="opt" style="flex:1;min-width:8rem;justify-content:center" data-m="Conducta inapropiada">Conducta inapropiada</button>
+      <button class="opt" style="flex:1;min-width:8rem;justify-content:center" data-m="Datos incorrectos">Datos incorrectos</button>
+    </div>
+    <input id="abuso-nota" class="fld" maxlength="160" placeholder="Detalle (opcional)" style="margin-top:.7rem">
+    <button id="abuso-send" class="send">Enviar reporte</button>
+    <button class="cancel" data-close>Cancelar</button>
+  </div>
+</div>
+
+<div id="sheet-guia" class="scrim" role="dialog" aria-modal="true" aria-label="Cómo funciona">
+  <div class="sheet">
+    <div class="grip"></div>
+    <h2>Cómo funciona</h2>
+    <p class="hint">Red gratuita y comunitaria de apoyo emocional tras el sismo. Hermana de <b>hospitalesenvenezuela.com</b>. Tres cosas que puedes hacer aquí:</p>
+    <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">1</span><div><b style="font-size:1rem">Encontrar con quién hablar</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">En <b>Profesionales</b> hay psicólogos, psiquiatras, terapeutas y voluntarios. Los que están 🟢 disponibles pueden atenderte ya, por WhatsApp o cita.</div></div></div>
+    <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">2</span><div><b style="font-size:1rem">Saber cómo estás</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">El <b>Test</b> (escala GAD-7) mide tu nivel de ansiedad en 2 minutos y te orienta sobre qué hacer. Es anónimo: nada sale de tu teléfono.</div></div></div>
+    <div style="display:flex;gap:.8rem;margin-bottom:1rem"><span style="flex:none;width:2.1rem;height:2.1rem;border-radius:.7rem;background:var(--brand-soft);color:var(--brand-deep);font-weight:800;display:flex;align-items:center;justify-content:center">3</span><div><b style="font-size:1rem">Pedir apoyo en el Mural</b><div style="font-size:.92rem;color:var(--ink-2);margin-top:.15rem">Personas, hospitales, colegios, centros de acopio y refugios publican peticiones. Los profesionales las <b>toman</b> y contactan al solicitante.</div></div></div>
+    <p style="font-size:.84rem;color:var(--muted);border-top:1px solid var(--line-2);padding-top:.9rem"><b>Sobre las credenciales:</b> el registro de psicólogos colegiados es <b>información pública</b> de la Federación de Psicólogos de Venezuela. Verifica cualquier FPV en <a href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer">sistema.fpv.org.ve/consulta-psicologos</a>. La plataforma es comunitaria y no sustituye atención médica de emergencia — en crisis llama al <b>171</b>.</p>
+    <button id="guia-ok" class="send">Entendido</button>
+  </div>
+</div>
+
+<button id="share-fab" class="share-fab" aria-label="Compartir">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+  Compartir
+</button>
+
+<div id="toast"></div>
+
+<script>
+const SUPABASE_URL      = "https://ozuxfepfkvnxkywdsqxy.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96dXhmZXBma3ZueGt5d2RzcXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MjI5NTEsImV4cCI6MjA5Nzk5ODk1MX0.YhW0GalGkQZdO2NJTg_01C5XhdMmJ6RbNSNXXC0xG4o";
+
+const CACHE_KEY="psi_cache_v1", SEEN_KEY="psi_seen_guia", FS_KEY="psi_fontscale", DEV_KEY="psi_dev", MI_ID_KEY="psi_mi_id";
+const ESTADOS_VE=["Amazonas","Anzoátegui","Apure","Aragua","Barinas","Bolívar","Carabobo","Cojedes","Delta Amacuro","Distrito Capital","Falcón","Guárico","La Guaira","Lara","Mérida","Miranda","Monagas","Nueva Esparta","Portuguesa","Sucre","Táchira","Trujillo","Yaracuy","Zulia"];
+
+let PROFS=[], PETS=[], filtro="todos", mfiltro="todas", view="apoyo";
+
+/* ---------- utils ---------- */
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function $(id){return document.getElementById(id);}
+function toast(msg,kind){const t=$("toast");t.textContent=msg;t.className="show"+(kind?(" "+kind):"");clearTimeout(t._t);t._t=setTimeout(()=>t.className="",3200);}
+function norm(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();}
+function soloDig(s){return String(s||"").replace(/\D/g,"");}
+function hace(ts){if(!ts)return"";const d=(Date.now()-new Date(ts).getTime())/1000;if(d<60)return"hace instantes";if(d<3600)return"hace "+Math.floor(d/60)+" min";if(d<86400)return"hace "+Math.floor(d/3600)+" h";const dd=Math.floor(d/86400);return"hace "+dd+(dd===1?" día":" días");}
+function getDeviceId(){try{let d=localStorage.getItem(DEV_KEY);if(!d){d=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():("dev-"+Date.now()+"-"+Math.random().toString(36).slice(2));localStorage.setItem(DEV_KEY,d);}return d;}catch(e){return "dev-"+Date.now()+Math.random().toString(36).slice(2);}}
+function waLink(num,txt){const d=soloDig(num);const n=d.startsWith("58")?d:(d.startsWith("0")?("58"+d.slice(1)):("58"+d));return "https://wa.me/"+n+(txt?("?text="+encodeURIComponent(txt)):"");}
+function igLink(h){return "https://instagram.com/"+String(h||"").replace(/^@/,"").trim();}
+
+/* ---------- API ---------- */
+function api(path,opts){opts=opts||{};return fetch(SUPABASE_URL+"/rest/v1/"+path,Object.assign({},opts,{headers:Object.assign({"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json"},opts.headers||{})}));}
+async function callRPC(name,body){
+  const r=await api("rpc/"+name,{method:"POST",body:JSON.stringify(body||{})});
+  if(!r.ok){let m="";try{const e=await r.json();m=(e&&(e.message||e.error||e.hint))||"";}catch(_){}throw new Error(m||"rpc");}
+  return await r.json().catch(()=>({}));
+}
+function motivo(err){
+  const m=(((err&&err.message)||"")+"").toLowerCase();
+  if(/limite|rate/.test(m))return "Alcanzaste el límite por ahora. Inténtalo en un rato.";
+  if(/nombre_incompleto/.test(m))return "Escribe tu nombre y apellido completos.";
+  if(/credencial_requerida/.test(m))return "Para psicólogos y psiquiatras la credencial es obligatoria (Ej: FPV 19976).";
+  if(/whatsapp_requerido/.test(m))return "Escribe tu número de WhatsApp para que puedan contactarte.";
+  if(/telefono_requerido/.test(m))return "Escribe un teléfono válido.";
+  if(/descripcion_corta/.test(m))return "Cuéntanos un poco más la situación (mínimo 10 caracteres).";
+  if(/clave_invalida/.test(m))return "Esa clave no coincide. Revisa los 6 dígitos que guardaste.";
+  if(/ya_tomada/.test(m))return "Otro profesional ya tomó esta petición. ¡Gracias igual!";
+  if(/no_existe/.test(m))return "No encontramos ese registro. Refresca la página.";
+  if(/duplicad/.test(m))return "Ya existe un registro con ese nombre y credencial.";
+  return "No se pudo completar. Revisa tu internet e inténtalo de nuevo.";
+}
+
+/* ---------- contadores ---------- */
+function animarNum(el,target){
+  if(!el)return; target=Math.max(0,target|0);
+  const fmt=n=>n.toLocaleString("es-VE");
+  const start=parseInt(String(el.textContent||"").replace(/\D/g,""))||0;
+  el.__t=target;
+  if(start===target||document.hidden||typeof requestAnimationFrame!=="function"){el.textContent=fmt(target);return;}
+  const dur=650,t0=performance.now();
+  function step(t){if(el.__t!==target)return;const p=Math.min(1,(t-t0)/dur);el.textContent=fmt(Math.round(start+(target-start)*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(step);}
+  setTimeout(()=>{if(el.__t===target)el.textContent=fmt(target);},dur+150);
+  requestAnimationFrame(step);
+}
+async function cargarStats(){
+  try{const s=await callRPC("psi_estadisticas",{});
+    if(s&&typeof s==="object"){animarNum($("stat-prof"),s.profesionales||0);animarNum($("stat-on"),s.online||0);animarNum($("stat-pet"),s.peticiones_abiertas||0);}
+  }catch(e){}
+}
+
+/* ---------- data ---------- */
+async function cargarProfs(){const r=await callRPC("psi_listar_profesionales",{});PROFS=Array.isArray(r)?r:[];try{localStorage.setItem(CACHE_KEY,JSON.stringify({t:Date.now(),p:PROFS}));}catch(e){}}
+async function cargarPets(){const r=await callRPC("psi_listar_peticiones",{});PETS=Array.isArray(r)?r:[];}
+
+/* ---------- render profesionales ---------- */
+const TIPO_PROF={psicologo:"Psicólogo/a",psiquiatra:"Psiquiatra",terapeuta:"Terapeuta",voluntario:"Voluntario que escucha"};
+const MODAL={online:"Online",presencial:"Presencial",ambas:"Online y presencial"};
+function poblarEstadosSel(){
+  const sel=$("f-estado");const es=[...new Set(PROFS.map(p=>p.estado))].filter(x=>x&&x!=="Por confirmar").sort((a,b)=>a.localeCompare(b,'es'));
+  const cur=sel.value;sel.innerHTML='<option value="">Todos los estados</option>'+es.map(e=>`<option value="${esc(e)}">${esc(e)}</option>`).join("");if(es.includes(cur))sel.value=cur;
+  const dl=$("estados-dl");if(dl&&!dl.children.length)dl.innerHTML=ESTADOS_VE.map(e=>`<option value="${esc(e)}">`).join("");
+}
+function aplicarFiltrosProf(){
+  const q=norm($("q").value),tip=$("f-tipo").value,est=$("f-estado").value;
+  return PROFS.filter(p=>{
+    if(tip&&p.tipo!==tip)return false;
+    if(est&&p.estado!==est)return false;
+    if(filtro==="online"&&!p.online_ahora)return false;
+    if(filtro==="gratis"&&!p.gratuito)return false;
+    if(filtro==="verificados"&&!p.verificado)return false;
+    if(q&&!norm([p.nombre,p.especialidades,p.ciudad,p.estado,TIPO_PROF[p.tipo]].join(" ")).includes(q))return false;
+    return true;
+  });
+}
+function profCard(p){
+  const cred=p.credencial?`<div class="cred">🎓 Credencial: <b>${esc(p.credencial)}</b>${p.tipo==="psicologo"?` · <a href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer">verificar en el registro FPV →</a>`:""}</div>`:"";
+  const ver=p.verificado?`<div class="vline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>Credencial verificada por la plataforma</div>`:"";
+  const wa=p.whatsapp?`<a class="act wa" href="${esc(waLink(p.whatsapp,"Hola, te encontré en psicologosenvenezuela.com y me gustaría hablar contigo."))}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>WhatsApp</a>`:"";
+  const ig=p.instagram?`<a class="act" href="${esc(igLink(p.instagram))}" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg>Instagram</a>`:"";
+  const tags=[`<span class="tag t-${esc(p.tipo)}">${esc(TIPO_PROF[p.tipo]||"Profesional")}</span>`];
+  if(p.gratuito)tags.push('<span class="tag t-gratis">Gratuito</span>');
+  if(p.acepta_visitas)tags.push('<span class="tag">Hace visitas</span>');
+  return `<li class="card" data-id="${esc(p.id)}">
+    <div class="card-top"><div>
+      <p class="name">${esc(p.nombre)}${p.verificado?' <span title="Credencial verificada" style="color:#0f8a45">✓</span>':""}</p>
+      <p class="sub">${tags.join("")}</p>
+      <p class="sub" style="margin-top:.35rem">${esc(p.ciudad)}, ${esc(p.estado)} · ${esc(MODAL[p.modalidad]||"")}</p>
+    </div><span class="badge ${p.online_ahora?"b-on":"b-off"}"><span class="d"></span>${p.online_ahora?"Disponible":"Según horario"}</span></div>
+    ${ver}${cred}
+    ${p.bio?`<div class="bio">${esc(p.bio)}</div>`:""}
+    ${p.especialidades?`<div class="meta">💠 ${esc(p.especialidades)}</div>`:""}
+    ${p.horarios?`<div class="meta">🕒 ${esc(p.horarios)}</div>`:""}
+    <div class="row-actions">
+      <button class="act" data-cita="${esc(p.id)}" data-nombre="${esc(p.nombre)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>Agendar cita</button>
+      ${wa}${ig}
+    </div>
+    <button class="flag" data-flag="${esc(p.id)}" data-name="${esc(p.nombre)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4h13l-1.5 4 1.5 4H4"/></svg>Reportar</button>
+  </li>`;
+}
+function renderProfs(){
+  const rows=aplicarFiltrosProf(),list=$("list"),empty=$("empty");
+  $("count").textContent=rows.length+(rows.length===1?" profesional":" profesionales y voluntarios");
+  if(!rows.length){list.innerHTML="";empty.classList.remove("hide");empty.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><div>'+(PROFS.length?"No hay nadie con ese filtro. Prueba con otro.":"<b>Aún no hay profesionales registrados.</b><br>¿Eres psicólogo, psiquiatra, terapeuta o quieres escuchar? Regístrate abajo.")+'</div>';return;}
+  empty.classList.add("hide");list.innerHTML=rows.map(profCard).join("");
+}
+
+/* ---------- render mural ---------- */
+const SOLIC={persona:"Persona",hospital:"Hospital",clinica:"Clínica",colegio:"Colegio",acopio:"Centro de acopio",refugio:"Refugio",otro:"Otro"};
+const AYUDA={psicologica:"Apoyo psicológico",psiquiatrica:"Atención psiquiátrica",terapeutica:"Terapia / contención",escucha:"Alguien que escuche"};
+function aplicarFiltrosPet(){
+  return PETS.filter(p=>{
+    if(mfiltro==="abierta"&&p.estado_peticion!=="abierta")return false;
+    if(mfiltro==="urgente"&&p.urgencia!=="urgente")return false;
+    if(mfiltro==="institucion"&&p.solicitante_tipo==="persona")return false;
+    return true;
+  });
+}
+function petCard(p){
+  const abierta=p.estado_peticion==="abierta";
+  const badge=abierta?(p.urgencia==="urgente"?'<span class="badge b-urg"><span class="d"></span>Urgente</span>':'<span class="badge b-nor"><span class="d"></span>Abierta</span>'):'<span class="badge b-tom"><span class="d"></span>Tomada</span>';
+  const quien=p.solicitante_tipo==="persona"?"Una persona":`${SOLIC[p.solicitante_tipo]||"Institución"}${p.institucion?": <b>"+esc(p.institucion)+"</b>":""}`;
+  return `<li class="card" data-id="${esc(p.id)}">
+    <div class="card-top"><div>
+      <p class="name">${AYUDA[p.ayuda_tipo]||"Apoyo"}</p>
+      <p class="sub"><span class="tag">${esc(SOLIC[p.solicitante_tipo]||"Otro")}</span>${esc(p.ciudad)}, ${esc(p.estado)}${p.personas?` · ~${esc(p.personas)} personas`:""}</p>
+    </div>${badge}</div>
+    <div class="bio">${esc(p.descripcion)}</div>
+    <div class="meta">Pide: ${quien} · Contacto: ${esc(p.telefono_mask||"····")} · ${esc(hace(p.creado))}</div>
+    ${abierta
+      ?`<div class="row-actions"><button class="act" data-tomar="${esc(p.id)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Soy profesional — tomar esta petición</button></div>`
+      :`<div class="meta" style="color:#143b73">✓ Tomada por <b>${esc(p.tomada_por||"un profesional")}</b>${p.tomada_credencial?(" · "+esc(p.tomada_credencial)):""} ${esc(hace(p.tomada_en))}</div>`}
+    <button class="flag" data-flagpet="${esc(p.id)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4h13l-1.5 4 1.5 4H4"/></svg>Reportar</button>
+  </li>`;
+}
+function renderPets(){
+  const rows=aplicarFiltrosPet(),list=$("mlist"),empty=$("mempty");
+  $("mcount").textContent=rows.length+(rows.length===1?" petición":" peticiones");
+  if(!rows.length){list.innerHTML="";empty.classList.remove("hide");empty.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div>'+(PETS.length?"No hay peticiones con ese filtro.":"<b>Aún no hay peticiones.</b><br>Sé el primero en pedir apoyo — es gratis y tu teléfono va oculto.")+'</div>';return;}
+  empty.classList.add("hide");list.innerHTML=rows.map(petCard).join("");
+}
+
+/* ---------- QUIZ GAD-7 ---------- */
+const QZ_PREG=[
+  "¿Te has sentido nervioso/a, ansioso/a o con los nervios de punta?",
+  "¿No has podido dejar de preocuparte o controlar la preocupación?",
+  "¿Te has preocupado demasiado por diferentes cosas?",
+  "¿Has tenido dificultad para relajarte?",
+  "¿Has estado tan inquieto/a que no puedes quedarte quieto/a?",
+  "¿Te has molestado o irritado con facilidad?",
+  "¿Has sentido miedo, como si algo terrible fuera a pasar?"
+];
+const QZ_OPTS=[["Nunca",0],["Varios días",1],["Más de la mitad de los días",2],["Casi todos los días",3]];
+const QZ_CTX=[["duelo","Perdí a un familiar o amigo"],["sismo","Sobreviví al terremoto"],["casa","Perdí mi casa"],["trabajo","No he podido volver a trabajar"],["cuido","Estoy cuidando a otros"],["nodecir","Prefiero no decirlo"]];
+const QZ_CTX_TXT={
+  duelo:"Lo que sientes tras una pérdida se llama duelo, y no tienes que atravesarlo en soledad. Hablar de la persona que perdiste con alguien que sepa escuchar ayuda más de lo que parece.",
+  sismo:"Sobrevivir a un terremoto deja al cuerpo en alerta: sustos con los ruidos, problemas para dormir, revivir el momento. Es una reacción normal a algo anormal — y tiene tratamiento.",
+  casa:"Perder tu casa es perder tu refugio. Es normal sentir rabia, tristeza y miedo al futuro a la vez. Pedir apoyo no es debilidad: es una forma de reconstruir también por dentro.",
+  trabajo:"La incertidumbre por el trabajo y el dinero pesa mucho después de una emergencia. Ponerlo en palabras con un profesional ayuda a ordenar los próximos pasos.",
+  cuido:"Quien cuida a otros también necesita ser cuidado. No puedes servir de un envase vacío: hablar con alguien te ayuda a sostener a los tuyos.",
+  nodecir:""
+};
+let qzPaso=-1, qzResp=Array(7).fill(null), qzCtx=null;
+function qzRender(){
+  const q=$("quiz");
+  if(qzPaso===-1){
+    q.innerHTML=`<div class="q-step">Test de ansiedad · GAD-7 · 2 minutos</div>
+      <div class="q-title">7 preguntas sobre las últimas 2 semanas. Sin juicio — solo una brújula honesta para orientarte.</div>
+      <button class="send" id="qz-start">Empezar el test</button>`;
+    $("qz-start").addEventListener("click",()=>{qzPaso=0;qzRender();});
+    return;
+  }
+  if(qzPaso<7){
+    const sel=qzResp[qzPaso];
+    q.innerHTML=`<div class="q-step">Pregunta ${qzPaso+1} de 8</div>
+      <div class="q-progress"><div class="q-bar" style="width:${Math.round(((qzPaso)/8)*100)}%"></div></div>
+      <div class="q-title">En las últimas 2 semanas… ${esc(QZ_PREG[qzPaso])}</div>
+      <div class="opts">${QZ_OPTS.map((o,i)=>`<button class="opt${sel===i?" sel":""}" data-i="${i}"><span class="dot"></span>${esc(o[0])}</button>`).join("")}</div>
+      <div class="q-nav">
+        <button class="q-back" id="qz-back" ${qzPaso===0?"disabled":""} aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button class="send" id="qz-next" ${sel==null?"disabled":""}>Siguiente</button>
+      </div>`;
+    q.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{qzResp[qzPaso]=parseInt(b.getAttribute("data-i"),10);qzRender();}));
+    $("qz-back").addEventListener("click",()=>{qzPaso--;qzRender();});
+    $("qz-next").addEventListener("click",()=>{if(qzResp[qzPaso]==null)return;qzPaso++;qzRender();window.scrollTo({top:0,behavior:"smooth"});});
+    return;
+  }
+  if(qzPaso===7){
+    q.innerHTML=`<div class="q-step">Pregunta 8 de 8 · opcional</div>
+      <div class="q-progress"><div class="q-bar" style="width:88%"></div></div>
+      <div class="q-title">¿Qué situación estás atravesando? (para orientarte mejor)</div>
+      <div class="opts">${QZ_CTX.map(c=>`<button class="opt${qzCtx===c[0]?" sel":""}" data-c="${c[0]}"><span class="dot"></span>${esc(c[1])}</button>`).join("")}</div>
+      <div class="q-nav">
+        <button class="q-back" id="qz-back" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button class="send" id="qz-next">Ver mi resultado</button>
+      </div>`;
+    q.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{qzCtx=b.getAttribute("data-c");qzRender();}));
+    $("qz-back").addEventListener("click",()=>{qzPaso--;qzRender();});
+    $("qz-next").addEventListener("click",()=>{qzPaso++;qzRender();window.scrollTo({top:0,behavior:"smooth"});});
+    return;
+  }
+  // resultado
+  const total=qzResp.reduce((a,b)=>a+(b||0),0);
+  let nivel,cls,titulo,cuerpo,tips;
+  if(total<=4){nivel="mínima";cls="res-min";titulo="Ansiedad mínima ("+total+" / 21)";
+    cuerpo="Tu nivel de ansiedad está dentro de lo esperable, incluso después de lo vivido. Sentir algo de inquietud tras una emergencia es una respuesta normal del cuerpo.";
+    tips=["Mantén rutinas simples: comer, dormir y moverte a horas parecidas.","Habla de lo que pasó con gente de confianza — nombrar calma.","Si en las próximas semanas notas que empeora, vuelve a hacer el test."];}
+  else if(total<=9){nivel="leve";cls="res-leve";titulo="Ansiedad leve ("+total+" / 21)";
+    cuerpo="Hay señales de ansiedad leve. Es muy común tras un sismo y suele mejorar con apoyo y autocuidado — no tienes que esperar a estar peor para hablar con alguien.";
+    tips=["Prueba respirar lento: 4 segundos inhalando, 6 exhalando, unas 10 veces.","Limita el tiempo viendo noticias o videos del sismo.","Considera conversar con un voluntario o profesional del directorio — muchos son gratuitos."];}
+  else if(total<=14){nivel="moderada";cls="res-mod";titulo="Ansiedad moderada ("+total+" / 21)";
+    cuerpo="Tu resultado sugiere ansiedad moderada. Con este nivel, hablar con un psicólogo marca una diferencia real — mejor pronto que después.";
+    tips=["Te recomendamos agendar con un psicólogo del directorio (hay opción gratuita y online).","Si no puedes ahora, deja una petición en el Mural y un profesional te contacta.","Evita decidir cosas grandes en los días de más ansiedad."];}
+  else{nivel="severa";cls="res-sev";titulo="Ansiedad severa ("+total+" / 21)";
+    cuerpo="Tu resultado sugiere un nivel alto de ansiedad. No es tu culpa y no estás exagerando: es tu cuerpo pidiendo ayuda. Por favor, busca apoyo profesional lo antes posible — hay personas listas para atenderte hoy.";
+    tips=["Escríbele ahora a un profesional 🟢 disponible del directorio, o deja una petición urgente en el Mural.","Si sientes que no puedes más o piensas en hacerte daño, llama a <a href='tel:171'>171</a> o acude al centro de salud más cercano — mereces ayuda inmediata.","Intenta no pasar estos días en soledad: dile a alguien de confianza cómo te sientes."];}
+  const ctx=QZ_CTX_TXT[qzCtx]||"";
+  q.innerHTML=`<div class="q-step">Tu resultado</div>
+    <div class="res-band ${cls}"><h3>${titulo}</h3><p>${cuerpo}</p>${ctx?`<p style="margin-top:.6rem">${esc(ctx)}</p>`:""}</div>
+    <ul class="res-tips">${tips.map(t=>`<li>${t}</li>`).join("")}</ul>
+    <div class="q-nav" style="flex-direction:column;gap:.5rem">
+      <button class="send" id="qz-dir">Ver profesionales disponibles</button>
+      <button class="send dark" id="qz-mural">Dejar una petición en el Mural</button>
+      <button class="cancel" id="qz-again">Repetir el test</button>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin:.6rem 0 0;line-height:1.5">Escala GAD-7 (Spitzer et al.), de uso libre y aplicada en todo el mundo para tamizaje de ansiedad. Orientativa — no reemplaza la evaluación de un profesional. Tus respuestas <b>no se envían a ningún servidor</b>.</p>`;
+  $("qz-dir").addEventListener("click",()=>{setView("apoyo");document.querySelector('.chip[data-fil="online"]').click();});
+  $("qz-mural").addEventListener("click",()=>{setView("mural");setTimeout(()=>abrir("sheet-peticion"),250);});
+  $("qz-again").addEventListener("click",()=>{qzPaso=-1;qzResp=Array(7).fill(null);qzCtx=null;qzRender();});
+}
+
+/* ---------- navegación ---------- */
+function setView(v){
+  view=v;const idx={apoyo:0,test:1,mural:2}[v]||0;
+  $("segmented").setAttribute("data-i",idx);
+  document.querySelectorAll(".seg").forEach(s=>s.classList.toggle("on",s.getAttribute("data-view")===v));
+  $("view-apoyo").classList.toggle("hide",v!=="apoyo");
+  $("view-test").classList.toggle("hide",v!=="test");
+  $("view-mural").classList.toggle("hide",v!=="mural");
+  if(v==="mural")refrescarMural();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".seg").forEach(s=>s.addEventListener("click",()=>setView(s.getAttribute("data-view"))));
+$("cta-test").addEventListener("click",()=>setView("test"));
+
+/* ---------- sheets ---------- */
+function abrir(id){$(id).classList.add("open");document.body.style.overflow="hidden";}
+function cerrarSheets(){document.querySelectorAll(".scrim.open").forEach(s=>s.classList.remove("open"));document.body.style.overflow="";}
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",cerrarSheets));
+document.querySelectorAll(".scrim").forEach(s=>s.addEventListener("click",e=>{if(e.target===s)cerrarSheets();}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrarSheets();});
+$("cta-prof").addEventListener("click",()=>abrir("sheet-prof"));
+$("cta-mi-ficha").addEventListener("click",()=>{poblarMiFicha();abrir("sheet-ficha");});
+$("cta-peticion").addEventListener("click",()=>abrir("sheet-peticion"));
+$("btn-guia").addEventListener("click",()=>abrir("sheet-guia"));
+$("guia-ok").addEventListener("click",()=>{try{localStorage.setItem(SEEN_KEY,"1");}catch(e){}cerrarSheets();});
+
+/* ---------- registro profesional ---------- */
+$("pr-tipo").addEventListener("change",()=>{
+  const t=$("pr-tipo").value;
+  $("pr-cred-req").textContent=(t==="psicologo"||t==="psiquiatra")?"*":"(opcional)";
+  $("pr-cred").placeholder=t==="psiquiatra"?"Ej: MPPS 12345":"Ej: FPV 19976";
+});
+$("pr-send").addEventListener("click",async ()=>{
+  const nombre=($("pr-nombre").value||"").trim(),tipo=$("pr-tipo").value,cred=($("pr-cred").value||"").trim();
+  if(nombre.replace(/[^A-Za-zÀ-ÿñÑ ]/g,"").trim().length<5||!nombre.includes(" ")){toast("Escribe tu nombre y apellido","err");$("pr-nombre").focus();return;}
+  if((tipo==="psicologo"||tipo==="psiquiatra")&&cred.length<3){toast("La credencial es obligatoria para psicólogos y psiquiatras","err");$("pr-cred").focus();return;}
+  if(soloDig($("pr-wa").value).length<7){toast("Escribe tu WhatsApp","err");$("pr-wa").focus();return;}
+  const est=($("pr-estado").value||"").trim(),ciu=($("pr-ciudad").value||"").trim();
+  if(!est||!ciu){toast("Completa estado y ciudad","err");return;}
+  if(!$("pr-consent").checked){toast("Marca la autorización para publicar tu ficha","err");return;}
+  const btn=$("pr-send");btn.disabled=true;btn.textContent="Registrando…";
+  try{
+    const res=await callRPC("psi_registrar_profesional",{
+      p_nombre:nombre,p_tipo:tipo,p_credencial:cred||null,
+      p_estado:est,p_ciudad:ciu,p_modalidad:$("pr-modalidad").value,
+      p_acepta_visitas:$("pr-visitas").checked,p_gratuito:$("pr-gratis").checked,
+      p_whatsapp:($("pr-wa").value||"").trim(),p_instagram:($("pr-ig").value||"").trim()||null,
+      p_bio:($("pr-bio").value||"").trim()||null,p_especialidades:($("pr-esp").value||"").trim()||null,
+      p_horarios:($("pr-horarios").value||"").trim()||null,p_device:getDeviceId()
+    });
+    if(res&&res.duplicado){toast("Ya existe un registro con ese nombre y credencial","err");return;}
+    if(res&&res.ok){
+      try{localStorage.setItem(MI_ID_KEY,res.id);}catch(e){}
+      cerrarSheets();
+      ["pr-nombre","pr-cred","pr-wa","pr-ig","pr-estado","pr-ciudad","pr-horarios","pr-esp","pr-bio"].forEach(i=>$(i).value="");
+      $("pr-consent").checked=false;$("pr-gratis").checked=false;$("pr-visitas").checked=false;
+      $("clave-num").textContent=res.clave||"——————";
+      setTimeout(()=>abrir("sheet-clave"),200);
+      refrescarProfs();cargarStats();
+    }
+  }catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="Registrarme en la red";}
+});
+$("clave-copy").addEventListener("click",async ()=>{
+  try{await navigator.clipboard.writeText($("clave-num").textContent.trim());toast("Clave copiada","ok");}
+  catch(e){toast("Cópiala manualmente","err");}
+});
+
+/* ---------- mi ficha ---------- */
+function poblarMiFicha(){
+  const sel=$("mf-prof");const miId=(function(){try{return localStorage.getItem(MI_ID_KEY);}catch(e){return null;}})();
+  sel.innerHTML='<option value="">Elige tu nombre…</option>'+PROFS.map(p=>`<option value="${esc(p.id)}"${p.id===miId?" selected":""}>${esc(p.nombre)}${p.credencial?(" · "+esc(p.credencial)):""}</option>`).join("");
+  $("mf-citas-list").innerHTML="";
+}
+async function miFichaAccion(online){
+  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
+  if(!id){toast("Elige tu nombre en la lista","err");return;}
+  if(clave.length<6){toast("Escribe tu clave de 6 dígitos","err");return;}
+  const btn=online?$("mf-on"):$("mf-off");btn.disabled=true;
+  try{
+    await callRPC("psi_actualizar_estado",{p_id:id,p_clave:clave,p_online:online,p_horarios:($("mf-horarios").value||"").trim()||null});
+    try{localStorage.setItem(MI_ID_KEY,id);}catch(e){}
+    toast(online?"🟢 ¡Listo! Apareces como disponible":"Disponibilidad apagada","ok");
+    refrescarProfs();cargarStats();
+  }catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;}
+}
+$("mf-on").addEventListener("click",()=>miFichaAccion(true));
+$("mf-off").addEventListener("click",()=>miFichaAccion(false));
+$("mf-citas").addEventListener("click",async ()=>{
+  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
+  if(!id||clave.length<6){toast("Elige tu nombre y escribe tu clave","err");return;}
+  const btn=$("mf-citas");btn.disabled=true;btn.textContent="Cargando…";
+  try{
+    const cs=await callRPC("psi_mis_citas",{p_id:id,p_clave:clave});
+    try{localStorage.setItem(MI_ID_KEY,id);}catch(e){}
+    $("mf-citas-list").innerHTML=(Array.isArray(cs)&&cs.length)
+      ?cs.map(c=>`<div class="cred" style="margin-top:.5rem"><b>${esc(c.nombre)}</b> · <a href="${esc(waLink(c.telefono,"Hola "+c.nombre+", soy tu profesional de psicologosenvenezuela.com. Vi tu solicitud de cita."))}" target="_blank" rel="noopener noreferrer">${esc(c.telefono)} (WhatsApp)</a><br>${c.modalidad?("Prefiere: "+esc(c.modalidad)+" · "):""}${esc(hace(c.creado))}${c.mensaje?("<br>“"+esc(c.mensaje)+"”"):""}</div>`).join("")
+      :'<div class="cred" style="margin-top:.5rem">Aún nadie te ha pedido cita. Cuando pase, aparecerá aquí.</div>';
+  }catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="📋 Ver mis citas";}
+});
+
+/* ---------- agendar cita ---------- */
+let citaCtx=null;
+$("list").addEventListener("click",e=>{
+  const fl=e.target.closest("[data-flag]");
+  if(fl){abusoCtx={tipo:"psi_profesional",ref:fl.getAttribute("data-flag")+" · "+fl.getAttribute("data-name")};abrirAbuso(fl.getAttribute("data-name"));return;}
+  const b=e.target.closest("[data-cita]");if(!b)return;
+  citaCtx={id:b.getAttribute("data-cita"),nombre:b.getAttribute("data-nombre")};
+  $("cita-title").textContent="Agendar con "+citaCtx.nombre;
+  ["ci-nombre","ci-tel","ci-msg"].forEach(i=>$(i).value="");
+  abrir("sheet-cita");
+});
+$("ci-send").addEventListener("click",async ()=>{
+  if(!citaCtx)return;
+  const nom=($("ci-nombre").value||"").trim();
+  if(nom.length<2){toast("Escribe tu nombre","err");return;}
+  if(soloDig($("ci-tel").value).length<7){toast("Escribe tu teléfono","err");return;}
+  const btn=$("ci-send");btn.disabled=true;btn.textContent="Enviando…";
+  try{
+    await callRPC("psi_agendar_cita",{p_profesional:citaCtx.id,p_nombre:nom,p_telefono:($("ci-tel").value||"").trim(),p_modalidad:$("ci-mod").value,p_mensaje:($("ci-msg").value||"").trim()||null,p_device:getDeviceId()});
+    cerrarSheets();
+    const prof=PROFS.find(p=>p.id===citaCtx.id);
+    toast("Solicitud enviada. "+(prof&&prof.whatsapp?"También puedes escribirle directo por WhatsApp.":"El profesional te contactará."),"ok");
+    cargarStats();
+  }catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="Enviar solicitud de cita";}
+});
+
+/* ---------- crear petición ---------- */
+$("pe-quien").addEventListener("change",()=>{$("pe-inst-box").classList.toggle("hide",$("pe-quien").value==="persona");});
+$("pe-send").addEventListener("click",async ()=>{
+  const quien=$("pe-quien").value,inst=($("pe-inst").value||"").trim();
+  if(quien!=="persona"&&inst.length<2){toast("Escribe el nombre de la institución","err");$("pe-inst").focus();return;}
+  const nom=($("pe-nombre").value||"").trim();
+  if(nom.length<2){toast("Escribe tu nombre","err");return;}
+  if(soloDig($("pe-tel").value).length<7){toast("Escribe un teléfono de contacto","err");return;}
+  const est=($("pe-estado").value||"").trim(),ciu=($("pe-ciudad").value||"").trim();
+  if(!est||!ciu){toast("Completa estado y ciudad","err");return;}
+  const desc=($("pe-desc").value||"").trim();
+  if(desc.length<10){toast("Cuéntanos un poco más la situación","err");$("pe-desc").focus();return;}
+  if(!$("pe-consent").checked){toast("Marca la autorización para publicar","err");return;}
+  const btn=$("pe-send");btn.disabled=true;btn.textContent="Publicando…";
+  try{
+    await callRPC("psi_crear_peticion",{
+      p_solicitante_tipo:quien,p_nombre:nom,p_telefono:($("pe-tel").value||"").trim(),p_descripcion:desc,
+      p_ayuda_tipo:$("pe-ayuda").value,p_urgencia:$("pe-urgencia").value,
+      p_institucion:quien==="persona"?null:inst,p_estado:est,p_ciudad:ciu,
+      p_personas:parseInt($("pe-personas").value,10)||null,p_device:getDeviceId()
+    });
+    cerrarSheets();
+    ["pe-inst","pe-nombre","pe-tel","pe-estado","pe-ciudad","pe-personas","pe-desc"].forEach(i=>$(i).value="");
+    $("pe-consent").checked=false;
+    toast("Petición publicada. Los profesionales ya pueden verla.","ok");
+    refrescarMural();cargarStats();
+  }catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="Publicar petición";}
+});
+
+/* ---------- tomar petición ---------- */
+let tomarCtx=null;
+$("mlist").addEventListener("click",e=>{
+  const fl=e.target.closest("[data-flagpet]");
+  if(fl){abusoCtx={tipo:"psi_peticion",ref:fl.getAttribute("data-flagpet")};abrirAbuso("esta petición");return;}
+  const b=e.target.closest("[data-tomar]");if(!b)return;
+  tomarCtx={id:b.getAttribute("data-tomar")};
+  $("to-result").innerHTML="";["to-nombre","to-cred","to-tel"].forEach(i=>$(i).value="");
+  abrir("sheet-tomar");
+});
+$("to-send").addEventListener("click",async ()=>{
+  if(!tomarCtx)return;
+  const nom=($("to-nombre").value||"").trim();
+  if(nom.length<5||!nom.includes(" ")){toast("Escribe tu nombre y apellido","err");return;}
+  if(soloDig($("to-tel").value).length<7){toast("Escribe tu teléfono","err");return;}
+  const btn=$("to-send");btn.disabled=true;btn.textContent="Confirmando…";
+  try{
+    const res=await callRPC("psi_tomar_peticion",{p_id:tomarCtx.id,p_nombre:nom,p_credencial:($("to-cred").value||"").trim()||null,p_telefono:($("to-tel").value||"").trim(),p_device:getDeviceId()});
+    if(res&&res.ok){
+      $("to-result").innerHTML=`<div class="cred" style="margin-top:.7rem;background:var(--ok-bg);border:1px solid #bfe6c9">✅ <b>Petición tomada.</b> Contacto del solicitante:<br><a href="${esc(waLink(res.telefono,"Hola, soy "+nom+", profesional de psicologosenvenezuela.com. Vi tu petición de apoyo y quiero ayudar."))}" target="_blank" rel="noopener noreferrer" style="font-size:1.1rem;font-weight:800">${esc(res.telefono)} — abrir WhatsApp</a><br><span style="font-size:.8rem;color:var(--muted)">Guárdalo ahora: por privacidad no volverá a mostrarse.</span></div>`;
+      refrescarMural();cargarStats();
+    }
+  }catch(err){toast(motivo(err),"err");}
+  finally{btn.disabled=false;btn.textContent="Confirmar — dame el contacto";}
+});
+
+/* ---------- reportar ---------- */
+let abusoCtx=null,abusoMotivo=null;
+function abrirAbuso(nombre){
+  abusoMotivo=null;
+  $("abuso-sub").textContent=(nombre?('"'+nombre+'" · '):"")+"Tu reporte ayuda a moderar la red.";
+  $("abuso-op").querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));$("abuso-nota").value="";
+  abrir("sheet-abuso");
+}
+$("abuso-op").addEventListener("click",e=>{const o=e.target.closest(".opt");if(!o)return;$("abuso-op").querySelectorAll(".opt").forEach(x=>x.classList.remove("sel"));o.classList.add("sel");abusoMotivo=o.getAttribute("data-m");});
+$("abuso-send").addEventListener("click",async ()=>{
+  if(!abusoCtx)return;
+  const motivoTxt=[abusoMotivo,($("abuso-nota").value||"").trim()].filter(Boolean).join(" — ")||null;
+  const btn=$("abuso-send");btn.disabled=true;btn.textContent="Enviando…";
+  try{await callRPC("reportar_abuso",{p_tipo:abusoCtx.tipo,p_referencia:abusoCtx.ref,p_motivo:motivoTxt,p_device:getDeviceId()});toast("Gracias, lo revisaremos","ok");cerrarSheets();}
+  catch(err){toast("No se pudo enviar el reporte","err");}
+  finally{btn.disabled=false;btn.textContent="Enviar reporte";}
+});
+
+/* ---------- refrescar ---------- */
+async function refrescarProfs(){
+  try{await cargarProfs();poblarEstadosSel();renderProfs();}
+  catch(e){
+    try{const c=JSON.parse(localStorage.getItem(CACHE_KEY)||"null");if(c&&c.p){PROFS=c.p;poblarEstadosSel();renderProfs();}}catch(_){}
+  }
+}
+async function refrescarMural(){
+  try{await cargarPets();renderPets();}
+  catch(e){$("mlist").innerHTML="";$("mempty").classList.remove("hide");$("mempty").innerHTML="<div>No se pudo cargar el mural. Revisa tu conexión.</div>";}
+}
+
+/* ---------- filtros ---------- */
+$("q").addEventListener("input",renderProfs);
+$("f-tipo").addEventListener("change",renderProfs);
+$("f-estado").addEventListener("change",renderProfs);
+document.querySelectorAll('.chip[data-fil]').forEach(c=>c.addEventListener("click",()=>{document.querySelectorAll('.chip[data-fil]').forEach(x=>x.classList.remove("on"));c.classList.add("on");filtro=c.getAttribute("data-fil");renderProfs();}));
+document.querySelectorAll('.chip[data-mfil]').forEach(c=>c.addEventListener("click",()=>{document.querySelectorAll('.chip[data-mfil]').forEach(x=>x.classList.remove("on"));c.classList.add("on");mfiltro=c.getAttribute("data-mfil");renderPets();}));
+
+/* ---------- compartir ---------- */
+(function(){
+  const b=$("share-fab");if(!b)return;
+  const url="https://psicologosenvenezuela.com";
+  const txt="Psicólogos en Venezuela — apoyo emocional gratuito después del sismo. Test de ansiedad, psicólogos disponibles y peticiones de apoyo:";
+  b.addEventListener("click",async ()=>{
+    try{if(navigator.share){await navigator.share({title:"Psicólogos en Venezuela",text:txt,url:url});return;}}
+    catch(e){if(e&&e.name==="AbortError")return;}
+    window.open("https://wa.me/?text="+encodeURIComponent(txt+" "+url),"_blank","noopener");
+  });
+})();
+
+/* ---------- tamaño de letra ---------- */
+const FS=[16,18,20,22];let fsi=1;
+function aplicarFS(){document.documentElement.style.fontSize=FS[fsi]+"px";try{localStorage.setItem(FS_KEY,fsi);}catch(e){}}
+$("a-minus").addEventListener("click",()=>{fsi=Math.max(0,fsi-1);aplicarFS();});
+$("a-plus").addEventListener("click",()=>{fsi=Math.min(FS.length-1,fsi+1);aplicarFS();});
+
+/* ---------- arranque ---------- */
+(function init(){
+  try{const s=localStorage.getItem(FS_KEY);if(s!=null){fsi=Math.min(FS.length-1,Math.max(0,parseInt(s,10)||1));}}catch(e){}
+  aplicarFS();
+  try{const c=JSON.parse(localStorage.getItem(CACHE_KEY)||"null");if(c&&c.p&&c.p.length){PROFS=c.p;poblarEstadosSel();renderProfs();}}catch(e){}
+  qzRender();
+  refrescarProfs();refrescarMural();
+  cargarStats();setInterval(cargarStats,45000);
+  try{if(!localStorage.getItem(SEEN_KEY))setTimeout(()=>abrir("sheet-guia"),500);}catch(e){}
+})();
+if("serviceWorker" in navigator){
+  let _refreshing=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{if(_refreshing)return;if(navigator.serviceWorker.controller){_refreshing=true;location.reload();}});
+  window.addEventListener("load",()=>{navigator.serviceWorker.register("./sw.js").then(r=>{try{r.update();}catch(e){}}).catch(()=>{});});
+}
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
