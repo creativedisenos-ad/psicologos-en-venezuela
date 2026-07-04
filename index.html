@@ -423,6 +423,7 @@
       <div class="nums">
         <a class="num" href="tel:171"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.3a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.25 1z"/></svg>Emergencias 171</a>
         <a class="num" href="https://sistema.fpv.org.ve/consulta-psicologos" target="_blank" rel="noopener noreferrer" style="color:var(--brand-deep)">✓ Verificar FPV</a>
+        <a class="num" href="https://sistemas.sacs.gob.ve/consultas/prfsnal_salud" target="_blank" rel="noopener noreferrer" style="color:#143b73">✓ Verificar MPPS</a>
       </div>
     </footer>
 
@@ -499,14 +500,34 @@
     </div>
 
     <div class="hero">
-      <div class="phead" style="margin-bottom:.3rem">
+      <div class="phead" style="margin-bottom:.5rem">
         <span class="avatar" id="pn-avatar" aria-hidden="true"></span>
         <div class="pinfo">
           <p class="name" id="pn-nombre">—</p>
           <p class="handle" id="pn-tipo">—</p>
         </div>
       </div>
-      <p style="margin:.6rem 0 1rem"><span class="badge b-off" id="pn-estado-badge"><span class="d"></span>—</span></p>
+      <span class="badge b-off" id="pn-estado-badge"><span class="d"></span>—</span>
+    </div>
+
+    <div class="hero">
+      <h2 style="font-size:1.05rem;margin:0 0 .3rem">📋 Mis citas</h2>
+      <p style="margin:0 0 .8rem">Quien te pidió cita aparece aquí. Acepta o rechaza, y contáctalo por WhatsApp.</p>
+      <ul id="pn-citas" class="list"></ul>
+      <div id="pn-citas-empty" class="empty hide"></div>
+    </div>
+
+    <div class="hero">
+      <b style="font-size:1.02rem">Disponibilidad</b>
+      <p style="margin:.3rem 0 .9rem">Actívala cuando puedas atender — se apaga sola a las 12 horas.</p>
+      <div style="display:flex;gap:.5rem">
+        <button id="pn-on" class="send" style="flex:1">🟢 Estoy disponible</button>
+        <button id="pn-off" class="send dark" style="flex:1">Apagar disponible</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h2 style="font-size:1.05rem;margin:0 0 .8rem">Editar mi ficha</h2>
       <input id="pn-foto" type="file" accept="image/*" style="display:none">
       <label for="pn-foto" class="pickbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.2rem;height:1.2rem"><circle cx="12" cy="13" r="3.2"/><path d="M3 8.5A2 2 0 0 1 5 6.5h2l1.2-1.6h7.6L18 6.5h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span id="pn-foto-name">📷 Cambiar foto de perfil</span></label>
       <label for="pn-bio">Sobre ti (bio)</label>
@@ -520,22 +541,6 @@
       <label for="pn-wa">WhatsApp</label>
       <input id="pn-wa" class="fld" inputmode="tel" maxlength="40" placeholder="Ej: 0412-0221090">
       <button id="pn-guardar" class="send">💾 Guardar cambios de mi ficha</button>
-    </div>
-
-    <div class="hero">
-      <b style="font-size:1.02rem">Disponibilidad</b>
-      <p style="margin:.3rem 0 .9rem">Actívala cuando puedas atender — se apaga sola a las 12 horas.</p>
-      <div style="display:flex;gap:.5rem">
-        <button id="pn-on" class="send" style="flex:1">🟢 Estoy disponible</button>
-        <button id="pn-off" class="send dark" style="flex:1">Apagar disponible</button>
-      </div>
-    </div>
-
-    <div class="hero">
-      <h2 style="font-size:1.05rem;margin:0 0 .3rem">📋 Mis citas</h2>
-      <p style="margin:0 0 .8rem">Quien te pidió cita aparece aquí. Acepta o rechaza, y contáctalo por WhatsApp.</p>
-      <ul id="pn-citas" class="list"></ul>
-      <div id="pn-citas-empty" class="empty hide"></div>
     </div>
   </section>
 </div>
@@ -608,8 +613,8 @@
     <div class="grip"></div>
     <h2>Iniciar sesión</h2>
     <p class="hint">Con tu <b>clave de gestión</b> de 6 dígitos entras a tu panel: subes tu foto, editas tu ficha, te marcas disponible y respondes tus citas.</p>
-    <label for="mf-prof">¿Quién eres?</label>
-    <select id="mf-prof" class="fld"><option value="">Elige tu nombre…</option></select>
+    <label for="mf-cred">Tu número de credencial (FPV o MPPS) *</label>
+    <input id="mf-cred" class="fld" inputmode="numeric" placeholder="Ej: 19976">
     <label for="mf-clave">Tu clave de gestión *</label>
     <input id="mf-clave" class="fld" inputmode="numeric" maxlength="6" placeholder="La clave de 6 dígitos que guardaste">
     <button id="mf-entrar" class="send">Entrar a mi panel</button>
@@ -1072,11 +1077,21 @@ let PANEL=null;
 function leerSesion(){try{const s=JSON.parse(localStorage.getItem(SESSION_KEY)||"null");return (s&&s.id&&s.clave)?s:null;}catch(e){return null;}}
 function guardarSesion(id,clave){try{localStorage.setItem(SESSION_KEY,JSON.stringify({id:id,clave:clave}));localStorage.setItem(MI_ID_KEY,id);}catch(e){}}
 function borrarSesion(){try{localStorage.removeItem(SESSION_KEY);}catch(e){}}
+function normCred(s){return String(s||"").replace(/\D/g,"");}
+function buscarPorCredencial(cred){
+  const c=normCred(cred);
+  if(!c)return null;
+  return PROFS.find(p=>normCred(p.credencial)===c)||null;
+}
 function poblarLogin(){
-  const sel=$("mf-prof");const sess=leerSesion();
-  const miId=sess?sess.id:(function(){try{return localStorage.getItem(MI_ID_KEY);}catch(e){return null;}})();
-  sel.innerHTML='<option value="">Elige tu nombre…</option>'+PROFS.map(p=>`<option value="${esc(p.id)}"${p.id===miId?" selected":""}>${esc(p.nombre)}${p.credencial?(" · "+esc(p.credencial)):""}</option>`).join("");
-  $("mf-clave").value=sess?sess.clave:"";
+  const sess=leerSesion();
+  if(sess){
+    const p=PROFS.find(x=>x.id===sess.id);
+    $("mf-cred").value=p&&p.credencial?p.credencial:"";
+    $("mf-clave").value=sess.clave;
+  }else{
+    $("mf-cred").value="";$("mf-clave").value="";
+  }
 }
 function estadoCitaBadge(estado){
   if(estado==="aceptada")return '<span class="badge b-on"><span class="d"></span>Aceptada</span>';
@@ -1137,11 +1152,12 @@ function abrirLogin(){
   }
 }
 $("mf-entrar").addEventListener("click",async ()=>{
-  const id=$("mf-prof").value,clave=($("mf-clave").value||"").trim();
-  if(!id){toast("Elige tu nombre en la lista","err");return;}
+  const clave=($("mf-clave").value||"").trim();
+  const p=buscarPorCredencial($("mf-cred").value);
+  if(!p){toast("No encontramos ese número de credencial","err");return;}
   if(clave.length<6){toast("Escribe tu clave de 6 dígitos","err");return;}
   const btn=$("mf-entrar");btn.disabled=true;btn.textContent="Entrando…";
-  try{await entrarPanel(id,clave,false);}
+  try{await entrarPanel(p.id,clave,false);}
   catch(err){toast(motivo(err),"err");}
   finally{btn.disabled=false;btn.textContent="Entrar a mi panel";}
 });

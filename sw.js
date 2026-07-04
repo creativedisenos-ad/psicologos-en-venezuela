@@ -1,6 +1,6 @@
 /* Service worker — la app abre sin señal, pero SIEMPRE intenta traer
    la versión más reciente cuando hay internet (network-first para el HTML). */
-const CACHE = "psi-ve-v6";
+const CACHE = "psi-ve-v7";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
