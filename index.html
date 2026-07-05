@@ -340,6 +340,39 @@
   .ally{display:inline-block!important;width:calc(50% - .3rem);vertical-align:top;box-sizing:border-box}
   .ally:not(.blue){margin-right:.6rem}
 }
+
+/* ===== Dashboard lateral en computadora (1200px+) ===== */
+#side-dash{display:none}
+@media(min-width:1200px){
+  .wrap{max-width:840px;margin-left:calc(50vw - 582px);margin-right:0}
+  #side-dash{display:block;position:fixed;top:110px;left:calc(50vw + 282px);width:300px;z-index:5;
+    background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-card);
+    padding:1.05rem 1rem 1.1rem;box-shadow:var(--shadow-card)}
+  #side-dash .sd-head{display:flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:700;letter-spacing:.04em;color:var(--ink-2);margin-bottom:.7rem}
+  #side-dash .sd-dot{width:.55rem;height:.55rem;border-radius:50%;background:#0f8a45;animation:sdpulse 1.6s infinite}
+  @keyframes sdpulse{0%,100%{opacity:1}50%{opacity:.35}}
+  #side-dash .sd-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+  #side-dash .sd-stat{background:var(--bg);border:1px solid var(--line-2);border-radius:.8rem;padding:.55rem .6rem;text-align:center}
+  #side-dash .sd-stat b{display:block;font-size:1.05rem;font-weight:800;color:var(--brand-deep)}
+  #side-dash .sd-stat span{font-size:.64rem;color:var(--muted);font-weight:600;line-height:1.2;display:block;margin-top:.1rem}
+  #side-dash .sd-last{font-size:.72rem;color:var(--muted);margin:.6rem 0 .7rem;min-height:1em;text-align:center}
+  #side-dash .sd-last b{color:var(--ink-2)}
+  #side-dash .sd-links{display:flex;flex-direction:column;gap:.45rem}
+  #side-dash .sd-links a{display:flex;align-items:center;gap:.5rem;color:#fff;text-decoration:none;font-size:.8rem;font-weight:700;padding:.55rem .75rem;border-radius:.7rem;box-shadow:var(--shadow-btn);transition:transform .2s,filter .2s}
+  #side-dash .sd-links a:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  #side-dash .sd-h{background:linear-gradient(135deg,#12b3b5,#076b6d)}
+  #side-dash .sd-p{background:linear-gradient(135deg,#8b6cf0,#4e35b5)}
+  #side-dash .sd-e{background:linear-gradient(135deg,#3f83f8,#173ea5)}
+  #side-dash .sd-f{background:linear-gradient(135deg,#0a8d8f 0%,#6d4fe0 52%,#1a56db 100%)}
+}
+
+/* Botón Iniciar sesión estilo empleos */
+.login-pill{flex:none;display:flex;align-items:center;gap:.32rem;height:2.5rem;padding:0 .8rem;border-radius:var(--r-pill);
+  border:none;background:var(--grad-brand);color:#fff;cursor:pointer;font-weight:800;font-size:.82rem;white-space:nowrap;
+  box-shadow:var(--shadow-btn);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.login-pill:active{transform:scale(.95)}
+.login-pill svg{width:1.1rem;height:1.1rem;flex:none}
+@media (max-width:560px){.login-pill{width:2.5rem;padding:0;justify-content:center}.login-pill span{display:none}}
 </style>
 </head>
 <body>
@@ -360,8 +393,9 @@
       <button id="btn-guia" class="icon-btn" aria-label="Cómo funciona">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.4" fill="currentColor"/></svg>
       </button>
-      <button id="btn-login" class="icon-btn" aria-label="Iniciar sesión, soy profesional" title="Iniciar sesión">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><path d="M10 17l5-5-5-5"/><path d="M4 12h11"/></svg>
+      <button id="btn-login" class="login-pill" aria-label="Iniciar sesión" title="Iniciar sesión">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        <span>Iniciar sesión</span>
       </button>
     </div>
   </div>
@@ -1395,5 +1429,43 @@ if("serviceWorker" in navigator){
 </script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
+
+<aside id="side-dash" aria-label="La red en vivo">
+  <div class="sd-head"><span class="sd-dot"></span> LA RED EN VIVO</div>
+  <div class="sd-grid">
+    <div class="sd-stat"><b id="sd-pac">…</b><span>personas registradas</span></div>
+    <div class="sd-stat"><b id="sd-enc" style="color:#0f8a45">…</b><span>encontradas</span></div>
+    <div class="sd-stat"><b id="sd-alta">…</b><span>dadas de alta</span></div>
+    <div class="sd-stat"><b id="sd-prof" style="color:#6d4fe0">…</b><span>psicólogos y psiquiatras</span></div>
+    <div class="sd-stat"><b id="sd-disp" style="color:#0f8a45">…</b><span>disponibles ahora</span></div>
+    <div class="sd-stat"><b id="sd-perf" style="color:#1a56db">…</b><span>buscando empleo</span></div>
+  </div>
+  <p class="sd-last" id="sd-last"></p>
+  <div class="sd-links">
+    <a class="sd-h" href="https://hospitalesenvenezuela.com">🏥 Hospitales en Venezuela</a>
+    <a class="sd-p" href="https://psicologosenvenezuela.com">🧠 Psicólogos en Venezuela</a>
+    <a class="sd-e" href="https://empleoenvenezuela.com">💼 Empleo en Venezuela</a>
+    <a class="sd-f" href="https://envenezuela.app">✚ La fundación: envenezuela.app</a>
+  </div>
+</aside>
+
+<script>
+(function(){
+  if(!window.matchMedia||!matchMedia("(min-width:1200px)").matches)return;
+  var B="https://ozuxfepfkvnxkywdsqxy.supabase.co/rest/v1/rpc/";
+  var K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96dXhmZXBma3ZueGt5d2RzcXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MjI5NTEsImV4cCI6MjA5Nzk5ODk1MX0.YhW0GalGkQZdO2NJTg_01C5XhdMmJ6RbNSNXXC0xG4o";
+  function call(n){return fetch(B+n,{method:"POST",headers:{apikey:K,Authorization:"Bearer "+K,"Content-Type":"application/json"},body:"{}"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});}
+  function fmt(n){return Number(n||0).toLocaleString("es-VE");}
+  function pon(id,v){var e=document.getElementById(id);if(e&&v!=null)e.textContent=fmt(v);}
+  function rel(iso){try{var s=(Date.now()-new Date(iso).getTime())/1e3;if(s<90)return"hace un momento";if(s<3600)return"hace "+Math.round(s/60)+" min";if(s<86400)return"hace "+Math.round(s/3600)+" h";return"hace "+Math.round(s/86400)+" días";}catch(e){return"";}}
+  function carga(){
+    call("estadisticas").then(function(h){if(!h)return;pon("sd-pac",h.pacientes);pon("sd-enc",h.encontradas);pon("sd-alta",h.altas);
+      var l=document.getElementById("sd-last");if(l&&h.ultima_registrada)l.innerHTML="Última persona registrada <b>"+rel(h.ultima_registrada)+"</b>";});
+    call("psi_estadisticas").then(function(p){if(!p)return;pon("sd-prof",p.profesionales);pon("sd-disp",p.online);});
+    call("emp_estadisticas").then(function(e){if(!e)return;pon("sd-perf",e.perfiles);});
+  }
+  carga();setInterval(carga,60000);
+})();
+</script>
 </body>
 </html>
