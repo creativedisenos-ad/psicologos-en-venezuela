@@ -320,6 +320,16 @@
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   #toast.err{background:var(--bad)}#toast.ok{background:var(--ok)}
   @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+
+/* ===== Desktop (960px+): layout de computadora, mobile intacto ===== */
+@media(min-width:960px){
+  .wrap{max-width:1020px}
+  ul.list{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;align-items:start}
+  .scrim{align-items:center;padding:2rem}
+  .sheet{border-radius:1.5rem;max-height:88vh;transform:translateY(24px)}
+  .scrim.open .sheet{transform:translateY(0)}
+  .sheet .grip{display:none}
+}
 </style>
 </head>
 <body>
@@ -752,7 +762,7 @@
 const SUPABASE_URL      = "https://ozuxfepfkvnxkywdsqxy.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96dXhmZXBma3ZueGt5d2RzcXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MjI5NTEsImV4cCI6MjA5Nzk5ODk1MX0.YhW0GalGkQZdO2NJTg_01C5XhdMmJ6RbNSNXXC0xG4o";
 
-const CACHE_KEY="psi_cache_v1", SEEN_KEY="psi_seen_guia_v2", FS_KEY="psi_fontscale", DEV_KEY="psi_dev", MI_ID_KEY="psi_mi_id";
+const CACHE_KEY="psi_cache_v1", SEEN_KEY="psi_seen_guia_v3", FS_KEY="psi_fontscale", DEV_KEY="psi_dev", MI_ID_KEY="psi_mi_id";
 const ESTADOS_VE=["Amazonas","Anzoátegui","Apure","Aragua","Barinas","Bolívar","Carabobo","Cojedes","Delta Amacuro","Distrito Capital","Falcón","Guárico","La Guaira","Lara","Mérida","Miranda","Monagas","Nueva Esparta","Portuguesa","Sucre","Táchira","Trujillo","Yaracuy","Zulia"];
 
 let PROFS=[], PETS=[], filtro="todos", mfiltro="todas", view="apoyo";
