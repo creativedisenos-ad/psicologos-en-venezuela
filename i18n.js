@@ -155,13 +155,13 @@
   function buildSelector(current) {
     var wrap = document.createElement("div");
     wrap.setAttribute("data-noi18n", "");
-    wrap.style.cssText = "position:fixed;right:14px;bottom:14px;z-index:99999;font-family:inherit";
+    wrap.style.cssText = "position:fixed;left:14px;bottom:14px;z-index:99999;font-family:inherit";
     var btn = document.createElement("button");
     btn.type = "button";
     btn.style.cssText = "display:flex;align-items:center;gap:.4rem;background:#fff;border:1px solid rgba(16,24,40,.15);border-radius:999px;padding:.5rem .8rem;font-weight:600;font-size:.85rem;color:#344054;box-shadow:0 8px 20px rgba(10,20,40,.18);cursor:pointer";
     btn.innerHTML = '<span aria-hidden="true">🌐</span><span id="i18n-cur">' + current.toUpperCase() + "</span>";
     var menu = document.createElement("div");
-    menu.style.cssText = "position:absolute;right:0;bottom:calc(100% + 8px);background:#fff;border:1px solid rgba(16,24,40,.12);border-radius:12px;box-shadow:0 24px 56px -8px rgba(10,20,40,.24);padding:.35rem;max-height:60vh;overflow:auto;display:none;min-width:150px";
+    menu.style.cssText = "position:absolute;left:0;bottom:calc(100% + 8px);background:#fff;border:1px solid rgba(16,24,40,.12);border-radius:12px;box-shadow:0 24px 56px -8px rgba(10,20,40,.24);padding:.35rem;max-height:60vh;overflow:auto;display:none;min-width:150px";
     LANGS.forEach(function (l) {
       var it = document.createElement("button");
       it.type = "button";
