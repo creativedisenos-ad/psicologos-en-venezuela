@@ -102,19 +102,14 @@
   var busy = false;
 
   function getLang() {
-    try {
-      var s = localStorage.getItem("red_lang");
-      if (s) return s;
-      return (navigator.language || "es").slice(0, 2).toLowerCase();
-    } catch (e) { return "es"; }
+    try { return localStorage.getItem("red_lang") || "es"; } catch (e) { return "es"; }
   }
   function norm(s) { return s.replace(/\s+/g, " ").trim(); }
 
   function translate(lang) {
-    var d = DICT[lang];
+    var d = DICT[lang] || {};
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === "ar") ? "rtl" : "ltr";
-    if (!d) return;
     busy = true;
     var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
